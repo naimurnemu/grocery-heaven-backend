@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "G:\\LearnOnePlus\\Level-2 Assignments\\level_2_assignment_3\\logs\\winston\\successes\\.7e67826ffdc0b5a88714c50c9bb20e697a01f774-audit.json",
+    "files": [
+        {
+            "date": 1689401264849,
+            "name": "G:\\LearnOnePlus\\Level-2 Assignments\\level_2_assignment_3\\logs\\winston\\successes\\phu-2023-15-07-12-success.log",
+            "hash": "c116fc7c5efc599da31e157a77936f9e541b3645c2aa98a828611ede4d2b13d3"
+        },
+        {
+            "date": 1689415708343,
+            "name": "G:\\LearnOnePlus\\Level-2 Assignments\\level_2_assignment_3\\logs\\winston\\successes\\phu-2023-15-07-16-success.log",
+            "hash": "03a4604b86f0ee7ef8f4ede725d9ee33544be56661aadba60295caaeda87c10d"
+        },
+        {
+            "date": 1689505978286,
+            "name": "G:\\LearnOnePlus\\Level-2 Assignments\\level_2_assignment_3\\logs\\winston\\successes\\phu-2023-16-07-17-success.log",
+            "hash": "7b1d7a923c5f301bc5850f4dcca9983596db8920ccf82ce99608314ac2f7d2bc"
+        }
+    ],
+    "hashType": "sha256"
+}
