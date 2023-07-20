@@ -4,6 +4,7 @@ import { IUser } from "./auth.interface"
 import { User } from "./auth.model"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import config from "../../../config";
 
 const createUser = async (user: IUser): Promise<IUser> => {
     const { email, password, ...userData } = user;
@@ -55,6 +56,9 @@ const signIn = async (payload: Partial<IUser>): Promise<IUser> => {
         throw new ApiError(httpStatus.NOT_FOUND, 'User does not exists!');
     }
 
+    if (!config.token_key) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'token key does not exists!');
+    }
 
     const responseData: IUser = {
         ...user.toJSON(),
@@ -62,19 +66,21 @@ const signIn = async (payload: Partial<IUser>): Promise<IUser> => {
     };
 
     let token: string;
+
+    // const key = ;
     if (user && (await bcrypt.compare(password, user.password))) {
         token = jwt.sign(
             { userId: user._id, email },
-            'hellotesttoken',
+            config.token_key,
             {
                 expiresIn: "2h",
             }
         )
 
         responseData.token = token;
+    } else {
+        throw new ApiError(httpStatus.UNAUTHORIZED, 'Wrong password!');
     }
-
-
 
     return responseData;
 }
