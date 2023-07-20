@@ -29,13 +29,21 @@ const userSchema = new Schema<IUser>(
             },
             required: true
         },
-        budget: {
-            type: Number,
+        gender: {
+            type: String,
             required: true
         },
-        income: {
-            type: Number,
+        address: {
+            type: String,
             required: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        age: {
+            type: Number
         }
     },
     {

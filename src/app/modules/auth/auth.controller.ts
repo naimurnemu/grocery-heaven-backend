@@ -19,6 +19,22 @@ const createUser: RequestHandler = catchAsync(
     }
 );
 
+const signIn: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const payload = req.body;
+
+        const result = await AuthService.signIn(payload);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'User signed in  successfully',
+            data: result
+        })
+    }
+);
+
 export const AuthController = {
-    createUser
+    createUser,
+    signIn
 }
