@@ -1,12 +1,12 @@
 import { ErrorRequestHandler } from 'express';
-import config from '../../config';
-import { IGenericErrorMessage } from '../interfaces/error';
-import handleValidationError from '../../errors/handleValidationError';
-import ApiError from '../../errors/ApiError';
-import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';
-import handleZodError from '../../errors/handleZodError';
+import config from '../../config';
+import ApiError from '../../errors/ApiError';
 import handleCastError from '../../errors/handleCastError';
+import handleValidationError from '../../errors/handleValidationError';
+import handleZodError from '../../errors/handleZodError';
+import { errorLogger } from '../../shared/logger';
+import { IGenericErrorMessage } from '../interfaces/error';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res) => {
   config.env === 'development'
