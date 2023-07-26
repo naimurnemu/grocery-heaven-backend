@@ -19,6 +19,18 @@ const createSubCategory: RequestHandler = catchAsync(
     }
 );
 
+const getAllSubCategories: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const result = await SubCategoryService.getAllSubCategory();
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'SubCategory retrieved successfully',
+            data: result
+        })
+    }
+)
 export const SubCategoryController = {
-    createSubCategory
+    createSubCategory,
+    getAllSubCategories
 }
