@@ -29,6 +29,11 @@
             "date": 1690306063768,
             "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-25-07-23-success.log",
             "hash": "509cf69d5e2a3ea05c0336f80ab299e0b81d4c882302cc69150bbf4061228723"
+        },
+        {
+            "date": 1690391677397,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-26-07-23-success.log",
+            "hash": "dea45b15aa3aa7c5eaba6f0383367c7ce136aa38760de37d33bc1325fe414ee9"
         }
     ],
     "hashType": "sha256"

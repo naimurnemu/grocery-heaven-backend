@@ -33,7 +33,7 @@ const updateCategoryByID = async(category: ICategory, params: string): Promise<I
     return responseData;
 }
 const getAllCategory = async (): Promise<ICategory[]> =>{
-    const allCategory = await Category.find({})
+    const allCategory = await Category.find({}).populate('subcategory', 'category name shortDesc -_id');
 
     return allCategory;
 }
