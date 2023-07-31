@@ -10,4 +10,7 @@ export default {
     port: process.env.PORT,
     database_url: process.env.DATABASE_URL,
     token_key: process.env.TOKEN_KEY,
+    mail_service: process.env.MAIL_SERVICE,
+    mail_username: process.env.MAIL_USERNAME,
+    mail_password: process.env.MAIL_PASSWORD
 };
