@@ -20,6 +20,7 @@ const getAllUsers: RequestHandler = catchAsync(
 
 const getSingleUser: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
+        // console.log(':::::', req.userId)
         const id = req.params.id;
         const result = await UserService.getSingleUser(id);
 

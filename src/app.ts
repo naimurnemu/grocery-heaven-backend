@@ -4,6 +4,7 @@ import cors from 'cors';
 import { logger } from './shared/logger';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
+import auth from './app/middlewares/auth';
 
 const app: Application = express();
 
@@ -12,7 +13,7 @@ app.use(cors());
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+// app.use(auth)
 // Application routes
 logger.info(app.get('env'));
 

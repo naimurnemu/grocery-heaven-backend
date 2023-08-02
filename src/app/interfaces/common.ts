@@ -18,6 +18,6 @@ export type IGenericResponse<T> = {
 export type IEmail = {
     to: string;
     subject: string;
-    text: string;
+    text?: string;
     html: string;
 }
