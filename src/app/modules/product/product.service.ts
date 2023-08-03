@@ -1,21 +1,15 @@
-import httpStatus from "http-status";
-import ApiError from "../../../errors/ApiError";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 
 const postAProduct = async (product: IProduct): Promise<IProduct> => {
     // const { name } = product
-    const isCategoryExist = await Product.findOne({ name })
-
-    if (isCategoryExist) {
-        throw new ApiError(httpStatus.CONFLICT, 'Category already exists!')
-    }
-    const newCategory = new Product({ ...product });
     
-    await newCategory.save();
+    const newProduct = new Product({ ...product, seller: "dfalsdkfjasdl"});
+       
+    await newProduct.save();
 
     const responseData: IProduct = {
-        ...newCategory.toJSON()
+        ...newProduct.toJSON()
     };
 
     return responseData;
@@ -37,7 +31,7 @@ const postAProduct = async (product: IProduct): Promise<IProduct> => {
 
 //     return allCategory;
 // }
-export const CategoryService = {
+export const ProductService = {
     postAProduct
 }
 
