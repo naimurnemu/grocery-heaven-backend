@@ -1,9 +1,10 @@
+
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 
 const postAProduct = async (product: IProduct): Promise<IProduct> => {
     // const { name } = product
-    
+
     const newProduct = new Product({ ...product, seller: "dfalsdkfjasdl"});
        
     await newProduct.save();
@@ -31,6 +32,7 @@ const postAProduct = async (product: IProduct): Promise<IProduct> => {
 
 //     return allCategory;
 // }
+
 export const ProductService = {
     postAProduct
 }
