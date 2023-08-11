@@ -6,34 +6,39 @@
     "auditLog": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\.be3f1af567c5fdf1cb0cc250b0d88b14607c3aeb-audit.json",
     "files": [
         {
-            "date": 1690220041725,
-            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-24-07-23-error.log",
-            "hash": "4bb2e0f730a8e4159975c193a0b433dc3c3445ffcd200d5b6fd27c86f04fc2fd"
+            "date": 1691599637490,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-09-08-22-error.log",
+            "hash": "838fb08d392a35c128a117ea8580419a165a4c03e9b62677c2936c1936077a3d"
         },
         {
-            "date": 1690286680268,
-            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-25-07-18-error.log",
-            "hash": "7cd6806acdd494ddea200090edca96e0399f8400f8ca64bb6e4189870ea51cbf"
+            "date": 1691600742876,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-09-08-23-error.log",
+            "hash": "b09f8b0ae996f2d71aeff3b5cdaa9444fcdb23bf139745ad4f3f4e8ca1fd76e8"
         },
         {
-            "date": 1690298239569,
-            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-25-07-21-error.log",
-            "hash": "a3725b99ea32810a316c3d00ab175dd401ec165bb54f3ff290db4761976504c6"
+            "date": 1691638426910,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-09-error.log",
+            "hash": "e4d1ae361c9da1b8494eca8388918a3c01e8576736b19e23ccbfe843645f2013"
         },
         {
-            "date": 1690301312113,
-            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-25-07-22-error.log",
-            "hash": "ac7d0c33c611d012bf675a64b7a3f9e070e0a7a93e238d06dcbf7b5bf8351629"
+            "date": 1691640647613,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-10-error.log",
+            "hash": "3872eea1d137eda344e181e214ded862331d07f9245e38f95d4d992ee793b2bf"
         },
         {
-            "date": 1690306063777,
-            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-25-07-23-error.log",
-            "hash": "e7282b6ed15a8ca189f93750a7d021beeb5f3fae3aaa57bd2d9fbd9aa18421ca"
+            "date": 1691678846176,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-20-error.log",
+            "hash": "00b032acec4fba11e51de7f8099f57514b25ddd6f3df3369dcf9b818f97d5bce"
         },
         {
-            "date": 1690391677411,
-            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-26-07-23-error.log",
-            "hash": "1d13cbbdd9971b5b716792982d101f0ad37a9ee77f2baa4f4d0c9b5ef2591b51"
+            "date": 1691679750723,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-21-error.log",
+            "hash": "8750520e2d25fa8673a70929adbdc3d439355bb7ce38eb3feb3905e5b077d8f2"
+        },
+        {
+            "date": 1691775197579,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-11-08-23-error.log",
+            "hash": "061a9713f000b01600a7213fe39d030f2e2eefadfafd5f0ac50656d27c6e4cd5"
         }
     ],
     "hashType": "sha256"

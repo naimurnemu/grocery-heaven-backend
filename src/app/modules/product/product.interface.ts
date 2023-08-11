@@ -11,7 +11,7 @@ export type IProduct = {
     weight: string;
     price: number;
     quantity: number;
-    discount?: string;
+    discount?: 'active' | 'notAvailable' | 'notInStock' | 'closed';
     production: Date;
     expired: Date;
     status: string;

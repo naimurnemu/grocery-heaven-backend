@@ -1,8 +1,8 @@
+import bcrypt from 'bcryptjs';
 import httpStatus from "http-status";
-import ApiError from "../../../errors/ApiError";
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 import config from "../../../config";
+import ApiError from "../../../errors/ApiError";
 import { AdminUser } from "../adminUser/adminUser.model";
 import { IAdminAuth } from "./adminAuth.interface";
 
@@ -33,7 +33,7 @@ const signIn = async (payload: Partial<IAdminAuth>): Promise<IAdminAuth> => {
     // const key = ;
     if (user && (await bcrypt.compare(password, user.password))) {
         token = jwt.sign(
-            { userId: user._id, email },
+            { userId: user._id, email, role: user.role },
             config.token_key,
             {
                 expiresIn: "2h",

@@ -1,11 +1,14 @@
 
+import { AuthUser } from "../../interfaces/common";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 
-const postAProduct = async (product: IProduct): Promise<IProduct> => {
+const postAProduct = async (product: IProduct, user: AuthUser | undefined): Promise<IProduct> => {
     // const { name } = product
-
-    const newProduct = new Product({ ...product, seller: "dfalsdkfjasdl"});
+    if(user?.role !== 'admin') {
+        console.log("hello world")
+    }
+    const newProduct = new Product({ ...product, seller: user?.userId});
        
     await newProduct.save();
 
@@ -16,24 +19,25 @@ const postAProduct = async (product: IProduct): Promise<IProduct> => {
     return responseData;
 }
 
-// const updateCategoryByID = async(category: ICategory, params: string): Promise<ICategory> => {
-//     const {name, shortDesc}= category;
+// const updateProductByID = async(product: IProduct, params: string): Promise<IProduct> => {
+//     const {title, description}= product;
 //     const id= params
-//     await Category.updateOne({_id: id},{ $set: { name: name, shortDesc: shortDesc } });
+//     await Product.updateOne({_id: id},{ $set: { title: title, description: description } });
 
-//     const responseData: ICategory = {
-//         ...category
+//     const responseData: IProduct = {
+//         ...product
 //     };
 
 //     return responseData;
 // }
-// const getAllCategory = async (): Promise<ICategory[]> =>{
-//     const allCategory = await Category.find({}).populate('subcategory', 'category name shortDesc -_id');
+const getAllProducts = async (): Promise<IProduct[]> =>{
+    const allCategory = await Product.find({}).populate('subcategory', 'category name shortDesc -_id');
 
-//     return allCategory;
-// }
+    return allCategory;
+}
 
 export const ProductService = {
-    postAProduct
+    postAProduct,
+    getAllProducts
 }
 

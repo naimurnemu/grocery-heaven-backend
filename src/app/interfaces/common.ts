@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import { IGenericErrorMessage } from './error';
 
 export type IGenericErrorResponse = {
@@ -20,4 +21,15 @@ export type IEmail = {
     subject: string;
     text?: string;
     html: string;
+}
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+export interface AuthenticatedRequest extends Request {
+    user?: AuthUser;
+  }
+export type AuthUser = {
+    userId: string;
+    email: string;
+    role: string;
+    iat: number;
+    exp: number
 }
