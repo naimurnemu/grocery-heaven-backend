@@ -7,6 +7,7 @@ import { UserRoutes } from '../modules/user/user.routes';
 import { AdminAuthRoutes } from '../modules/adminAuth/adminAuth.routes';
 import { AdminUserRoutes } from '../modules/adminUser/adminUser.routes';
 import { ProductRoutes } from '../modules/product/product.routes';
+import { HeroMasterDataRoutes } from '../modules/heroMasterData/heroMasterData.routes';
 
 const routes = express.Router();
 
@@ -38,6 +39,10 @@ const moduleRoutes = [
   {
     path: "/product",
     route: ProductRoutes
+  },
+  {
+    path: "/heroMasterData/",
+    route: HeroMasterDataRoutes
   }
 ];
 
