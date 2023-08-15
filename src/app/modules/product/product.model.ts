@@ -74,9 +74,9 @@ const productSchema = new Schema<IProduct>(
                 required: true
             }
         ],
-        seller: {
+        addedBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+            ref: 'AdminUser',
             required: true
         }
     },

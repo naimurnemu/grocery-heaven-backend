@@ -27,7 +27,7 @@ const createUser = async (user: IUser): Promise<IUser> => {
         { userId: newUser._id, email },
         'hellotesttoken',
         {
-            expiresIn: "2h",
+            expiresIn: "1d",
         }
     )
     //save user token
@@ -73,7 +73,7 @@ const signIn = async (payload: Partial<IUser>): Promise<IUser> => {
             { userId: user._id, email },
             config.token_key,
             {
-                expiresIn: "2h",
+                expiresIn: "1d",
             }
         )
 

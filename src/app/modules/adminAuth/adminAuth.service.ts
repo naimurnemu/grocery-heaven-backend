@@ -36,7 +36,7 @@ const signIn = async (payload: Partial<IAdminAuth>): Promise<IAdminAuth> => {
             { userId: user._id, email, role: user.role },
             config.token_key,
             {
-                expiresIn: "2h",
+                expiresIn: "1d",
             }
         )
 

@@ -4,7 +4,7 @@ import mongoose, { Model } from "mongoose";
 export type IProduct = {
     title: string;
     brand: string;
-    images:[{
+    images: [{
         url: string
     }];
     description: string;
@@ -31,9 +31,9 @@ export type IProduct = {
             ref: "Subcategory"
         }
     ];
-    seller: {
+    addedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'AdminUser'
     }
 }
 
