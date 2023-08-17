@@ -5,11 +5,11 @@ import { Product } from "./product.model";
 
 const postAProduct = async (product: IProduct, user: AuthUser | undefined): Promise<IProduct> => {
     // const { name } = product
-    if(user?.role !== 'admin') {
+    if (user?.role !== 'admin') {
         console.log("hello world")
     }
-    const newProduct = new Product({ ...product, seller: user?.userId});
-       
+    const newProduct = new Product({ ...product, seller: user?.userId });
+
     await newProduct.save();
 
     const responseData: IProduct = {
@@ -30,14 +30,24 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
 
 //     return responseData;
 // }
-const getAllProducts = async (): Promise<IProduct[]> =>{
+const getAllProducts = async (): Promise<IProduct[]> => {
     const allCategory = await Product.find({}).populate('subcategory', 'category name shortDesc -_id');
 
     return allCategory;
 }
 
+const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => {
+    const products = await Product.find({
+        status: "active",
+        category: { $all: [categoryID] },
+    }).populate('subcategory', 'category name shortDesc -_id');
+
+    return products
+
+}
 export const ProductService = {
     postAProduct,
-    getAllProducts
+    getAllProducts,
+    getProductByCategory
 }
 

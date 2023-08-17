@@ -33,7 +33,21 @@ const getAllProducts: RequestHandler = catchAsync(
         })
     }
 );
+
+const getProductsByCategory: RequestHandler = catchAsync(
+    async(req: Request, res: Response) => {
+        const id = req.params.id;
+        const result = await ProductService.getProductByCategory(id);
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'all product loaded',
+            data: result
+        })
+    }
+)
 export const ProductController = {
     postAProduct,
-    getAllProducts
+    getAllProducts,
+    getProductsByCategory
 }
