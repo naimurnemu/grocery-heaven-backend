@@ -8,8 +8,7 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
     if (user?.role !== 'admin') {
         console.log("hello world")
     }
-    const newProduct = new Product({ ...product, addedBy: user?.userId });
-
+    const newProduct = new Product({ ...product, seller: user?.userId });
     await newProduct.save();
 
     const responseData: IProduct = {
@@ -36,8 +35,18 @@ const getAllProducts = async (): Promise<IProduct[]> => {
     return allCategory;
 }
 
+const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => {
+    const products = await Product.find({
+        status: "active",
+        category: { $all: [categoryID] },
+    }).populate('subcategory', 'category name shortDesc -_id');
+
+    return products
+
+}
 export const ProductService = {
     postAProduct,
-    getAllProducts
+    getAllProducts,
+    getProductByCategory
 }
 
