@@ -1,9 +1,11 @@
+import { Model, Types } from "mongoose";
+import { IProduct } from "../product/product.interface";
+
 export type ICart = {
-    userId: string;
-    products: IProducts[];
+    userId: Types.ObjectId;
+    productId: Types.ObjectId | IProduct;
+    quantity: number;
 }
 
-type IProducts = {
-    name: string;
-    price: number;
-}
+
+export type CartModel = Model<ICart, Record<string, unknown>>;

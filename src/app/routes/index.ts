@@ -8,6 +8,7 @@ import { AdminAuthRoutes } from '../modules/adminAuth/adminAuth.routes';
 import { AdminUserRoutes } from '../modules/adminUser/adminUser.routes';
 import { ProductRoutes } from '../modules/product/product.routes';
 import { HeroMasterDataRoutes } from '../modules/heroMasterData/heroMasterData.routes';
+import { CartRoutes } from '../modules/cart/cart.routes';
 
 const routes = express.Router();
 
@@ -43,7 +44,11 @@ const moduleRoutes = [
   {
     path: "/heroMasterData/",
     route: HeroMasterDataRoutes
-  }
+  },
+  {
+    path: "/cart/",
+    route: CartRoutes
+  },
 ];
 
 moduleRoutes.forEach(({ path, route }) => {
