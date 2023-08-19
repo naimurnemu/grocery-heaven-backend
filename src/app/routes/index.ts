@@ -9,6 +9,7 @@ import { AdminUserRoutes } from '../modules/adminUser/adminUser.routes';
 import { ProductRoutes } from '../modules/product/product.routes';
 import { HeroMasterDataRoutes } from '../modules/heroMasterData/heroMasterData.routes';
 import { CartRoutes } from '../modules/cart/cart.routes';
+import { WishListRoutes } from '../modules/wishList/wishList.routes';
 
 const routes = express.Router();
 
@@ -48,6 +49,10 @@ const moduleRoutes = [
   {
     path: "/cart/",
     route: CartRoutes
+  },
+  {
+    path: "/wishList/",
+    route: WishListRoutes
   },
 ];
 

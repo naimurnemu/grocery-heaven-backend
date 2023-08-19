@@ -9,7 +9,7 @@ router.post('/signup/',
     validateRequest(UserValidation.createUserZodSchema),
     AuthController.createUser);
 
-router.get('/signin/', AuthController.signIn)
+router.post('/signin/', AuthController.signIn);
 
 
 
