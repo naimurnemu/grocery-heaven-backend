@@ -17,7 +17,7 @@ const getWishListByUserId: RequestHandler = catchAsync(
         sendResponse(res, {
             statusCode: httpStatus.OK,
             success: true,
-            message: 'Cart items retrieved successfully',
+            message: 'Wish List items retrieved successfully',
             data: result
         })
     }
@@ -35,7 +35,7 @@ const addWishListItem: RequestHandler = catchAsync(
         sendResponse(res, {
             statusCode: httpStatus.OK,
             success: true,
-            message: 'Cart item added successfully',
+            message: 'WishList item added successfully',
             data: result
         })
     }
@@ -49,7 +49,7 @@ const deleteWishListItem: RequestHandler = catchAsync(
         sendResponse(res, {
             statusCode: httpStatus.OK,
             success: true,
-            message: 'Cart item removed successfully',
+            message: 'WishList item removed successfully',
             data: result
         })
     }
