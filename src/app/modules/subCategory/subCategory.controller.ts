@@ -21,6 +21,7 @@ const createSubCategory: RequestHandler = catchAsync(
 
 const getAllSubCategories: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
+       
         const result = await SubCategoryService.getAllSubCategory();
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -29,8 +30,55 @@ const getAllSubCategories: RequestHandler = catchAsync(
             data: result
         })
     }
+);
+const getCategoryBySubCategory: RequestHandler = catchAsync(
+    async(req: Request, res: Response) => {
+        const id = req.params.id
+        const result = await SubCategoryService.getCategoryBySubCategory(id);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Category based on subCategory',
+            data: result
+        })
+    }
+)
+const updateSubCategory: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const category = req.body;
+        const id = req.params.id;
+
+        const result = await SubCategoryService.updateSubCategoryByID(category, id)
+        
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'SubCategory updated successfully',
+            data: result
+        })
+    }
+
+)
+const deleteSubCategoryById: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const id = req.params.id;
+
+        const result = await SubCategoryService.deleteSubCategoryById(id)
+        
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'SubCategory deleted successfully',
+            data: result
+        })
+    }
+
 )
 export const SubCategoryController = {
     createSubCategory,
-    getAllSubCategories
+    getAllSubCategories,
+    getCategoryBySubCategory,
+    deleteSubCategoryById,
+    updateSubCategory
 }

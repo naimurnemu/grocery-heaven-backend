@@ -1,4 +1,3 @@
-
 import { Category } from "../category/category.model";
 import { ISubCategory } from "./subCategory.interface";
 import { SubCategory } from "./subCategory.model";
@@ -24,9 +23,34 @@ const getAllSubCategory = async (): Promise<ISubCategory[]> =>{
 
     return allCategory;
 }
+const getCategoryBySubCategory = async (id: string): Promise<ISubCategory[]> => {
+    const allCategory = await SubCategory.find({category: {$all: [id]}}).populate('category', '_id name shortDesc').select('category')
+
+    return allCategory;
+}
+const updateSubCategoryByID = async(category: ISubCategory, params: string): Promise<ISubCategory> => {
+    const {name, shortDesc}= category;
+    const id= params
+    await SubCategory.updateOne({_id: id},{ $set: { name: name, shortDesc: shortDesc } });
+
+    const responseData: ISubCategory = {
+        ...category
+    };
+
+    return responseData;
+}
+const deleteSubCategoryById = async(id: string): Promise<string> => {
+    const deleteCategory = await SubCategory.deleteOne({ _id: id });
+    // console.log(deleteCategory)
+    if(deleteCategory.acknowledged === true) return "deleted"
+    else return "try again later"
+}
 export const SubCategoryService = {
     postSubCategory,
     // updateCategoryByID,
-    getAllSubCategory
+    getAllSubCategory,
+    getCategoryBySubCategory,
+    deleteSubCategoryById,
+    updateSubCategoryByID
 }
 

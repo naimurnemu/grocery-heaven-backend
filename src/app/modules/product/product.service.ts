@@ -9,7 +9,6 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
         console.log("hello world")
     }
     const newProduct = new Product({ ...product, addedBy: user?.userId });
-
     await newProduct.save();
 
     const responseData: IProduct = {
@@ -19,25 +18,36 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
     return responseData;
 }
 
-// const updateProductByID = async(product: IProduct, params: string): Promise<IProduct> => {
-//     const {title, description}= product;
-//     const id= params
-//     await Product.updateOne({_id: id},{ $set: { title: title, description: description } });
+const updateProductByID = async(product: IProduct, params: string): Promise<IProduct> => {
+    const {productName, description, price,brand}= product;
+    const id= params
+    await Product.updateOne({_id: id},{ $set: { productName: productName, description: description,price: price, brand: brand } });
 
-//     const responseData: IProduct = {
-//         ...product
-//     };
+    const responseData: IProduct = {
+        ...product
+    };
 
-//     return responseData;
-// }
+    return responseData;
+}
 const getAllProducts = async (): Promise<IProduct[]> => {
     const allCategory = await Product.find({}).populate('subcategory', 'category name shortDesc -_id');
 
     return allCategory;
 }
 
+const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => {
+    const products = await Product.find({
+        status: "active",
+        category: { $all: [categoryID] },
+    }).populate('subcategory', 'category name shortDesc -_id');
+
+    return products
+
+}
 export const ProductService = {
     postAProduct,
-    getAllProducts
+    getAllProducts,
+    getProductByCategory,
+    updateProductByID
 }
 

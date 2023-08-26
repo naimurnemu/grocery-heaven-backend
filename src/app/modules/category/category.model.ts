@@ -12,11 +12,6 @@ const categorySchema = new Schema<ICategory>(
             type: String,
             required: true
         },
-        products: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Product",
-            required: false
-        }],
         subcategory: [
             {
                 type: mongoose.Schema.Types.ObjectId,

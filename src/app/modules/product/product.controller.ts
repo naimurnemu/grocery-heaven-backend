@@ -7,10 +7,10 @@ import { ProductService } from "./product.service";
 
 const postAProduct: RequestHandler = catchAsync(
     async (req: AuthenticatedRequest, res: Response) => {
-        const category = req.body;
+        const product = req.body;
         const user = req.user;
         // console.log(req.user)
-        const result = await ProductService.postAProduct(category, user);
+        const result = await ProductService.postAProduct(product, user);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -20,6 +20,22 @@ const postAProduct: RequestHandler = catchAsync(
         })
     }
 );
+
+const updateASingleProduct: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const product = req.body;
+        const id = req.params.id;
+        // console.log(req.user)
+        const result = await ProductService.updateProductByID(product, id);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Product updated successfully',
+            data: result
+        })
+    }
+)
 const getAllProducts: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
         // console.log(req.user)
@@ -33,7 +49,22 @@ const getAllProducts: RequestHandler = catchAsync(
         })
     }
 );
+
+const getProductsByCategory: RequestHandler = catchAsync(
+    async(req: Request, res: Response) => {
+        const id = req.params.id;
+        const result = await ProductService.getProductByCategory(id);
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'all product loaded',
+            data: result
+        })
+    }
+)
 export const ProductController = {
     postAProduct,
-    getAllProducts
+    getAllProducts,
+    getProductsByCategory,
+    updateASingleProduct
 }
