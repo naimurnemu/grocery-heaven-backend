@@ -4,7 +4,7 @@ import { IProduct, ProductModel } from "./product.interface";
 
 const productSchema = new Schema<IProduct>(
     {
-        title: {
+        productName: {
             type: String,
             required: true
         },
@@ -12,12 +12,10 @@ const productSchema = new Schema<IProduct>(
             type: String,
             required: true
         },
-        images: [
+        productPicture: [
             {
-                url: {
-                    type: String,
-                    required: true
-                }
+                type: String,
+                required: true
             }
         ],
         description: {
@@ -35,21 +33,33 @@ const productSchema = new Schema<IProduct>(
             type: Number,
             required: true
         },
-        quantity: {
+        countInStock: {
             type: Number,
             required: true
         },
-        discount: {
+        productCode: {
             type: String,
+            required: true,
+        },
+        discount: {
+            type: Number,
             required: false
         },
-        production: {
+        manufacturingDate: {
             type: Date,
             required: false
         },
-        expired: {
+        expiredDate: {
             type: Date,
             required: false
+        },
+        type: {
+            type: String,
+            required: true
+        },
+        productPlan: {
+            type: String,
+            required: true
         },
         status: {
             type: String,
@@ -60,20 +70,16 @@ const productSchema = new Schema<IProduct>(
             ref: "Review",
             required: true
         }],
-        subcategory: [
-            {
+        subcategory: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Subcategory",
                 required: false
-            }
-        ],
-        category: [
-            {
+        },
+        category: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Category",
                 required: true
-            }
-        ],
+        },
         addedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'AdminUser',

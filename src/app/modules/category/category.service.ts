@@ -37,9 +37,16 @@ const getAllCategory = async (): Promise<ICategory[]> =>{
 
     return allCategory;
 }
+const deleteCategoryById = async(id: string): Promise<string> => {
+    const deleteCategory = await Category.deleteOne({ _id: id });
+    // console.log(deleteCategory)
+    if(deleteCategory.acknowledged === true) return "deleted"
+    else return "try again later"
+}
 export const CategoryService = {
     postCategory,
     updateCategoryByID,
-    getAllCategory
+    getAllCategory,
+    deleteCategoryById
 }
 

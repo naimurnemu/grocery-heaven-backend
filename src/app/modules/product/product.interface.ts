@@ -2,35 +2,32 @@ import mongoose, { Model } from "mongoose";
 
 
 export type IProduct = {
-    title: string;
+    productName: string;
     brand: string;
-    images: [{
-        url: string
-    }];
+    productCode: string;
+    productPicture: [{ type: string }];
     description: string;
     weight: string;
     price: number;
-    quantity: number;
-    discount?: 'active' | 'notAvailable' | 'notInStock' | 'closed';
-    production: Date;
-    expired: Date;
+    countInStock: number;
+    discount?: 0;
+    manufacturingDate: Date;
+    type: string;
+    expiredDate: Date;
     status: string;
+    productPlan: string;
     review: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review",
     }];
-    category: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Category",
-        },
-    ];
-    subcategory: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Subcategory"
-        }
-    ];
+    category:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+    };
+    subcategory:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Subcategory"
+    };
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'AdminUser'
