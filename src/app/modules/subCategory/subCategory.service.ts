@@ -36,7 +36,6 @@ const updateSubCategoryByID = async(category: ISubCategory, params: string): Pro
     const responseData: ISubCategory = {
         ...category
     };
-
     return responseData;
 }
 const deleteSubCategoryById = async(id: string): Promise<string> => {

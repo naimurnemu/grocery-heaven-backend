@@ -51,7 +51,7 @@ const getAllProducts: RequestHandler = catchAsync(
 );
 
 const getProductsByCategory: RequestHandler = catchAsync(
-    async(req: Request, res: Response) => {
+    async (req: Request, res: Response) => {
         const id = req.params.id;
         const result = await ProductService.getProductByCategory(id);
         sendResponse(res, {
@@ -61,10 +61,25 @@ const getProductsByCategory: RequestHandler = catchAsync(
             data: result
         })
     }
-)
+);
+const getHotProducts: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        
+        console.log("bismillah")
+        const result = await ProductService.getHotProduct();
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'all hot product',
+            data: result
+        })
+    }
+);
 export const ProductController = {
     postAProduct,
     getAllProducts,
     getProductsByCategory,
-    updateASingleProduct
+    updateASingleProduct,
+    getHotProducts
 }

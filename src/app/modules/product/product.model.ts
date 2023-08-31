@@ -71,14 +71,14 @@ const productSchema = new Schema<IProduct>(
             required: true
         }],
         subcategory: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Subcategory",
-                required: false
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Subcategory",
+            required: false
         },
         category: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Category",
-                required: true
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Category",
+            required: true
         },
         addedBy: {
             type: mongoose.Schema.Types.ObjectId,
@@ -86,6 +86,9 @@ const productSchema = new Schema<IProduct>(
             required: true
         }
     },
+    {
+        timestamps: true,
+    }
 
 );
 

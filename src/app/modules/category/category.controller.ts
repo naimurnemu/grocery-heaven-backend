@@ -34,7 +34,19 @@ const updateCategory: RequestHandler = catchAsync(
     }
 
 )
+const getSubCategoryByCategory: RequestHandler = catchAsync(
+    async(req: Request, res: Response) => {
+        const id = req.params.id
+        const result = await CategoryService.getSubCategoryByCategory(id);
 
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'SubCategory based on Category',
+            data: result
+        })
+    }
+)
 const getAllCategories: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
         const result = await CategoryService.getAllCategory();
@@ -66,5 +78,6 @@ export const CategoryController = {
     createCategory,
     updateCategory,
     getAllCategories,
-    deleteCategoryById
+    deleteCategoryById,
+    getSubCategoryByCategory
 }

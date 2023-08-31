@@ -43,10 +43,16 @@ const deleteCategoryById = async(id: string): Promise<string> => {
     if(deleteCategory.acknowledged === true) return "deleted"
     else return "try again later"
 }
+const getSubCategoryByCategory = async (id: string): Promise<ICategory[]> => {
+    const allCategory = await Category.find({_id: id}).populate('subcategory', '_id name shortDesc').select('subCategory')
+
+    return allCategory;
+}
 export const CategoryService = {
     postCategory,
     updateCategoryByID,
     getAllCategory,
-    deleteCategoryById
+    deleteCategoryById,
+    getSubCategoryByCategory,
 }
 

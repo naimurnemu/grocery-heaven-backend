@@ -1,4 +1,7 @@
 
+import httpStatus from "http-status";
+import moment from "moment";
+import ApiError from "../../../errors/ApiError";
 import { AuthUser } from "../../interfaces/common";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
@@ -6,7 +9,7 @@ import { Product } from "./product.model";
 const postAProduct = async (product: IProduct, user: AuthUser | undefined): Promise<IProduct> => {
     // const { name } = product
     if (user?.role !== 'admin') {
-        console.log("hello world")
+        throw new ApiError(httpStatus.CONFLICT, 'Unauthorized User!')
     }
     const newProduct = new Product({ ...product, addedBy: user?.userId });
     await newProduct.save();
@@ -18,10 +21,10 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
     return responseData;
 }
 
-const updateProductByID = async(product: IProduct, params: string): Promise<IProduct> => {
-    const {productName, description, price,brand}= product;
-    const id= params
-    await Product.updateOne({_id: id},{ $set: { productName: productName, description: description,price: price, brand: brand } });
+const updateProductByID = async (product: IProduct, params: string): Promise<IProduct> => {
+    const { productName, description, price, brand , discount} = product;
+    const id = params
+    await Product.updateOne({ _id: id }, { $set: { productName: productName, description: description, price: price, brand: brand , discount: discount} });
 
     const responseData: IProduct = {
         ...product
@@ -30,9 +33,9 @@ const updateProductByID = async(product: IProduct, params: string): Promise<IPro
     return responseData;
 }
 const getAllProducts = async (): Promise<IProduct[]> => {
-    const allCategory = await Product.find({}).populate('subcategory', 'category name shortDesc -_id');
+    const allProducts = await Product.find({}).populate('subcategory', 'category name shortDesc -_id');
 
-    return allCategory;
+    return allProducts;
 }
 
 const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => {
@@ -43,11 +46,28 @@ const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => 
 
     return products
 
+};
+
+const getHotProduct = async (): Promise<IProduct[]> => {
+   
+    const hotproduct = await Product.find({
+        status: "active",
+        createdAt: {
+            $gte: moment().subtract(6, 'days').format()
+            // $lt: new Date(2012, 7, 15)
+        },
+        discount: {
+            $gte: 5
+        }
+    }).populate('subcategory', 'category name shortDesc -_id');
+
+    return hotproduct
 }
 export const ProductService = {
     postAProduct,
     getAllProducts,
     getProductByCategory,
-    updateProductByID
+    updateProductByID,
+    getHotProduct,
 }
 
