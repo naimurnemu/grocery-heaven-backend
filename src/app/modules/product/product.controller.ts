@@ -64,8 +64,6 @@ const getProductsByCategory: RequestHandler = catchAsync(
 );
 const getHotProducts: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
-        
-        console.log("bismillah")
         const result = await ProductService.getHotProduct();
 
         sendResponse(res, {

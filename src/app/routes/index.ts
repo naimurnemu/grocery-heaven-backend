@@ -6,9 +6,9 @@ import { UserRoutes } from '../modules/user/user.routes';
 
 import { AdminAuthRoutes } from '../modules/adminAuth/adminAuth.routes';
 import { AdminUserRoutes } from '../modules/adminUser/adminUser.routes';
-import { ProductRoutes } from '../modules/product/product.routes';
-import { HeroMasterDataRoutes } from '../modules/heroMasterData/heroMasterData.routes';
 import { CartRoutes } from '../modules/cart/cart.routes';
+import { HeroMasterDataRoutes } from '../modules/heroMasterData/heroMasterData.routes';
+import { ProductRoutes } from '../modules/product/product.routes';
 import { WishListRoutes } from '../modules/wishList/wishList.routes';
 
 const routes = express.Router();
@@ -39,7 +39,7 @@ const moduleRoutes = [
     route: SubCategoryRoutes
   },
   {
-    path: "/product",
+    path: "/product/",
     route: ProductRoutes
   },
   {
