@@ -74,10 +74,24 @@ const getHotProducts: RequestHandler = catchAsync(
         })
     }
 );
+const getRelatedProduct: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const {categoryId, pid} = req.body;
+        const result = await ProductService.getRelatedProduct(categoryId,pid);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'all related product',
+            data: result
+        })
+    }
+);
 export const ProductController = {
     postAProduct,
     getAllProducts,
     getProductsByCategory,
     updateASingleProduct,
-    getHotProducts
+    getHotProducts,
+    getRelatedProduct
 }

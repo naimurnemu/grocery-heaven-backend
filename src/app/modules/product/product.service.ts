@@ -22,9 +22,9 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
 }
 
 const updateProductByID = async (product: IProduct, params: string): Promise<IProduct> => {
-    const { productName, description, price, brand , discount} = product;
+    const { productName, description, price, brand , discount, category} = product;
     const id = params
-    await Product.updateOne({ _id: id }, { $set: { productName: productName, description: description, price: price, brand: brand , discount: discount} });
+    await Product.updateOne({ _id: id }, { $set: { productName: productName, description: description, price: price, brand: brand , discount: discount, category: category} });
 
     const responseData: IProduct = {
         ...product
@@ -63,11 +63,22 @@ const getHotProduct = async (): Promise<IProduct[]> => {
 
     return hotproduct
 }
+const getRelatedProduct = async (categoryID: string, pid: string): Promise<IProduct[]> => {
+   
+    const hotproduct = await Product.find({
+        status: "active",
+        category: { $all: [categoryID] },
+        _id: { $ne: pid }
+    }).populate('subcategory', 'category name shortDesc -_id');
+
+    return hotproduct
+}
 export const ProductService = {
     postAProduct,
     getAllProducts,
     getProductByCategory,
     updateProductByID,
     getHotProduct,
+    getRelatedProduct
 }
 
