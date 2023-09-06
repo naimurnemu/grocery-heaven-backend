@@ -9,7 +9,7 @@ import { IEmail } from "../../interfaces/common";
 const createUser: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
         const user = req.body;
-
+        user.role = 'user';
         const result = await AuthService.createUser(user);
 
         sendResponse(res, {

@@ -3,6 +3,7 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { UserService } from "./user.service";
+import { AuthUser } from "../../interfaces/common";
 
 const getAllUsers: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
@@ -18,11 +19,12 @@ const getAllUsers: RequestHandler = catchAsync(
     }
 );
 
+
 const getSingleUser: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
-        // console.log(':::::', req.userId)
-        const id = req.params.id;
-        const result = await UserService.getSingleUser(id);
+        // console.log(':::::', req.user)
+        const user = req.user
+        const result = await UserService.getSingleUser(user as AuthUser);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,

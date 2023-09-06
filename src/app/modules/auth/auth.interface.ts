@@ -5,7 +5,7 @@ export type IUser = {
     email: string;
     password: string;
     phoneNumber?: string;
-    // role: Role;
+    role: 'user';
     name?: {
         firstName: string;
         lastName: string;

@@ -1,62 +1,31 @@
 import { NextFunction, Request, Response } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../../config";
-import { AuthUser } from "../interfaces/common";
+import ApiError from "../../errors/ApiError";
+import httpStatus from "http-status";
+import { jwtHelpers } from "../../helpers/jwtHelpers";
+import { Secret } from "jsonwebtoken";
 
-// type DecodedUser = {
-//     userId: string;
-// }
-
-const user = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const token = req.headers.authorization;
-        if (token) {
-            const tokenValue = token.split(" ")[1];
-            const decodedToken = jwt.verify(tokenValue, String(config.token_key)) as JwtPayload;
-            if (decodedToken && typeof decodedToken === 'object' && 'userId' in decodedToken) {
-                const user: AuthUser = decodedToken as AuthUser;
-                // req.userId = user.userId;
-                (req as Request & { user: AuthUser }).user = user;
-
-                next();
-            } else {
-                throw new Error('Invalid token format.');
+const auth = (...roles: string[]) =>
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const token = req.headers.authorization;
+            if (!token) {
+                throw new ApiError(httpStatus.UNAUTHORIZED, 'User is not authorized')
             }
-        } else {
-            res.status(401).json({ message: 'Unauthorized User' });
+
+            let verifiedUser = null;
+            verifiedUser = jwtHelpers.verifyToken(token, config.jwt.access_secret as Secret);
+            const { _id: userId, ...otherData } = verifiedUser;
+
+            req.user = { userId, ...otherData };
+
+            if (roles.length && !roles.includes(verifiedUser.role)) {
+                throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden')
+            };
+            next();
+        } catch (error) {
+            next(error);
         }
-    } catch (error) {
-        console.log(error);
-        res.status(401).json({ message: 'Unauthorized User' });
     }
-}
 
-// const user = (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         const token = req.headers.authorization;
-
-//         if (token) {
-//             const tokenValue = token.split(" ")[1];
-//             const decodedToken = jwt.verify(tokenValue, String(config.token_key)) as JwtPayload;
-
-//             if (decodedToken && typeof decodedToken === 'object' && 'userId' in decodedToken) {
-//                 const user: DecodedUser = decodedToken as DecodedUser;
-//                 // req.userId = user.userId;
-//                 (req as Request & { userId: string }).userId = user.userId;
-
-//                 next();
-//             } else {
-//                 throw new Error('Invalid token format.');
-//             }
-//         } else {
-//             res.status(401).json({ message: 'Unauthorized User' });
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         res.status(401).json({ message: 'Unauthorized User' });
-//     }
-// }
-
-export const Auth = {
-    user
-};
+export default auth;

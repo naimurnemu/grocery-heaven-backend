@@ -3,8 +3,9 @@ import ApiError from "../../../errors/ApiError";
 import { IUser } from "./auth.interface"
 import { User } from "./auth.model"
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import { Secret } from 'jsonwebtoken'
 import config from "../../../config";
+import { jwtHelpers } from "../../../helpers/jwtHelpers";
 
 const createUser = async (user: IUser): Promise<IUser> => {
     const { email, password, ...userData } = user;
@@ -23,12 +24,10 @@ const createUser = async (user: IUser): Promise<IUser> => {
     });
     await newUser.save();
 
-    const token = jwt.sign(
-        { userId: newUser._id, email },
-        'hellotesttoken',
-        {
-            expiresIn: "1d",
-        }
+    const token = jwtHelpers.createToken(
+        { userId: newUser._id, email, role: user.role },
+        config.jwt.access_secret as Secret,
+        config.jwt.access_expires_in as string
     )
     //save user token
 
@@ -69,12 +68,10 @@ const signIn = async (payload: Partial<IUser>): Promise<IUser> => {
 
     // const key = ;
     if (user && (await bcrypt.compare(password, user.password))) {
-        token = jwt.sign(
-            { userId: user._id, email },
-            config.token_key,
-            {
-                expiresIn: "1d",
-            }
+        token = jwtHelpers.createToken(
+            { userId: user._id, email, role: 'user' },
+            config.jwt.access_secret as Secret,
+            config.jwt.access_expires_in as string
         )
 
         responseData.token = token;

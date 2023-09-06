@@ -1,12 +1,13 @@
 import express from 'express';
 import { CartController } from './cart.controller';
-import { Auth } from '../../middlewares/auth';
+import auth from '../../middlewares/auth';
+import { ROLE } from '../../interfaces/common';
 
 
 const router = express.Router();
 
-router.get('/', Auth.user, CartController.getCartItemsByUserId);
-router.post('/', Auth.user, CartController.addCartItem);
-router.delete('/:id', Auth.user, CartController.deleteCartItem);
+router.get('/', auth(ROLE.USER), CartController.getCartItemsByUserId);
+router.post('/', auth(ROLE.USER), CartController.addCartItem);
+router.delete('/:id', auth(ROLE.USER), CartController.deleteCartItem);
 
 export const CartRoutes = router;

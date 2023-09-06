@@ -1,12 +1,14 @@
 import express from 'express';
 import { UserController } from './user.controller';
-import { Auth } from '../../middlewares/auth';
+import auth from '../../middlewares/auth';
+import { ROLE } from '../../interfaces/common';
+
 
 const router = express.Router();
 
 
-router.get('/:id', Auth.user, UserController.getSingleUser);
-router.get('/', UserController.getAllUsers);
+router.get('/single-user', auth(ROLE.USER), UserController.getSingleUser);
+router.get('/users', auth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.getAllUsers);
 
 router.patch('/:id', UserController.updateUser);
 
