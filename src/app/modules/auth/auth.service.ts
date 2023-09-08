@@ -55,9 +55,9 @@ const signIn = async (payload: Partial<IUser>): Promise<IUser> => {
         throw new ApiError(httpStatus.NOT_FOUND, 'User does not exists!');
     }
 
-    if (!config.token_key) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'token key does not exists!');
-    }
+    // if (!config.token_key) {
+    //     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'token key does not exists!');
+    // }
 
     const responseData: IUser = {
         ...user.toJSON(),

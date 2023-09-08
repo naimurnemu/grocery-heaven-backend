@@ -24,9 +24,9 @@ const getSingleUser = async (user: AuthUser): Promise<IUserWithoutPassword | nul
     return userDetailsWithoutPassword;
 }
 
-const updateUser = async (id: string, payload: Partial<IUser>): Promise<IUser | null> => {
-    const user = await User.findOneAndUpdate({ _id: id }, payload, { new: true });
-    return user;
+const updateUser = async (user: AuthUser, payload: Partial<IUser>): Promise<IUser | null> => {
+    const userDetails = await User.findOneAndUpdate({ _id: user.userId }, payload, { new: true });
+    return userDetails;
 }
 
 

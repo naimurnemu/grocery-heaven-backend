@@ -2,15 +2,15 @@ import { Request, RequestHandler, Response } from "express";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
-import { AuthenticatedRequest } from "../../interfaces/common";
 import { ProductService } from "./product.service";
+import { AuthUser } from "../../interfaces/common";
 
 const postAProduct: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
+    async (req: Request, res: Response) => {
         const product = req.body;
         const user = req.user;
         // console.log(req.user)
-        const result = await ProductService.postAProduct(product, user);
+        const result = await ProductService.postAProduct(product, user as AuthUser);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -76,8 +76,8 @@ const getHotProducts: RequestHandler = catchAsync(
 );
 const getRelatedProduct: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
-        const {categoryId, pid} = req.body;
-        const result = await ProductService.getRelatedProduct(categoryId,pid);
+        const { categoryId, pid } = req.body;
+        const result = await ProductService.getRelatedProduct(categoryId, pid);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,

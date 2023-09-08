@@ -1,10 +1,11 @@
 import bcrypt from 'bcryptjs';
 import httpStatus from "http-status";
-import jwt from 'jsonwebtoken';
+import { Secret } from 'jsonwebtoken';
 import config from "../../../config";
 import ApiError from "../../../errors/ApiError";
 import { AdminUser } from "../adminUser/adminUser.model";
 import { IAdminAuth } from "./adminAuth.interface";
+import { jwtHelpers } from '../../../helpers/jwtHelpers';
 
 const signIn = async (payload: Partial<IAdminAuth>): Promise<IAdminAuth> => {
     const { email, password } = payload;
@@ -19,9 +20,9 @@ const signIn = async (payload: Partial<IAdminAuth>): Promise<IAdminAuth> => {
         throw new ApiError(httpStatus.NOT_FOUND, 'User does not exists!');
     }
 
-    if (!config.token_key) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'token key does not exists!');
-    }
+    // if (!config.token_key) {
+    //     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'token key does not exists!');
+    // }
 
     const responseData: IAdminAuth = {
         ...user.toJSON(),
@@ -32,12 +33,10 @@ const signIn = async (payload: Partial<IAdminAuth>): Promise<IAdminAuth> => {
 
     // const key = ;
     if (user && (await bcrypt.compare(password, user.password))) {
-        token = jwt.sign(
+        token = jwtHelpers.createToken(
             { userId: user._id, email, role: user.role },
-            config.token_key,
-            {
-                expiresIn: "1d",
-            }
+            config.jwt.access_secret as Secret,
+            config.jwt.access_expires_in as string
         )
 
         responseData.token = token;

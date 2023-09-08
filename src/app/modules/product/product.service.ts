@@ -6,7 +6,7 @@ import { AuthUser } from "../../interfaces/common";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 
-const postAProduct = async (product: IProduct, user: AuthUser | undefined): Promise<IProduct> => {
+const postAProduct = async (product: IProduct, user: AuthUser): Promise<IProduct> => {
     // const { name } = product
     if (user?.role !== 'admin') {
         throw new ApiError(httpStatus.CONFLICT, 'Unauthorized User!')
@@ -22,9 +22,9 @@ const postAProduct = async (product: IProduct, user: AuthUser | undefined): Prom
 }
 
 const updateProductByID = async (product: IProduct, params: string): Promise<IProduct> => {
-    const { productName, description, price, brand , discount, category} = product;
+    const { productName, description, price, brand, discount, category } = product;
     const id = params
-    await Product.updateOne({ _id: id }, { $set: { productName: productName, description: description, price: price, brand: brand , discount: discount, category: category} });
+    await Product.updateOne({ _id: id }, { $set: { productName: productName, description: description, price: price, brand: brand, discount: discount, category: category } });
 
     const responseData: IProduct = {
         ...product
@@ -49,7 +49,7 @@ const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => 
 };
 
 const getHotProduct = async (): Promise<IProduct[]> => {
-   
+
     const hotproduct = await Product.find({
         status: "active",
         createdAt: {
@@ -64,7 +64,7 @@ const getHotProduct = async (): Promise<IProduct[]> => {
     return hotproduct
 }
 const getRelatedProduct = async (categoryID: string, pid: string): Promise<IProduct[]> => {
-   
+
     const hotproduct = await Product.find({
         status: "active",
         category: { $all: [categoryID] },
