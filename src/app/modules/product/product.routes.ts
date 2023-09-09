@@ -1,7 +1,7 @@
 import express from 'express';
+import { ROLE } from '../../interfaces/common';
 import auth from '../../middlewares/auth';
 import { ProductController } from './product.controller';
-import { ROLE } from '../../interfaces/common';
 
 
 const router = express.Router();
@@ -11,6 +11,7 @@ router.put('/update/:id', auth(ROLE.ADMIN, ROLE.SUPER_ADMIN), ProductController.
 router.get('/', ProductController.getAllProducts);
 router.get('/hotProduct/', ProductController.getHotProducts)
 router.post('/relatedProduct/', ProductController.getRelatedProduct)
+router.delete('/:id', ProductController.deleteASingleProduct)
 router.get("/:id", ProductController.getProductsByCategory)
 
 // router.put('/update/:id', CategoryController.updateCategory)

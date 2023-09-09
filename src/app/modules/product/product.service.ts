@@ -73,12 +73,24 @@ const getRelatedProduct = async (categoryID: string, pid: string): Promise<IProd
 
     return hotproduct
 }
+const deleteProduct = async (id: string): Promise<string> => {
+    const product = Product.findOneAndDelete({
+        _id: id,
+      });
+      if(!product) {
+        return "something went wrong"
+      }
+     else {
+        return "Product Deleted"
+     }
+}
 export const ProductService = {
     postAProduct,
     getAllProducts,
     getProductByCategory,
     updateProductByID,
     getHotProduct,
-    getRelatedProduct
+    getRelatedProduct,
+    deleteProduct
 }
 

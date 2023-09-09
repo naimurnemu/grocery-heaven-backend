@@ -25,9 +25,14 @@ const deleteCartItem = async (
     return result;
 };
 
-
+const bestSellingProduct = async () : Promise<ICart[]> => {
+    const products = await  Cart.find({}).sort({ salesQuantity: -1 }).limit(5)
+    console.log(products)
+    return products
+}
 export const CartService = {
     getCartItemsByUserId,
     addCartItem,
-    deleteCartItem
+    deleteCartItem,
+    bestSellingProduct
 }
