@@ -24,9 +24,18 @@ const getSingleUser = async (user: AuthUser): Promise<IUserWithoutPassword | nul
     return userDetailsWithoutPassword;
 }
 
-const updateUser = async (user: AuthUser, payload: Partial<IUser>): Promise<IUser | null> => {
+const updateUser = async (user: AuthUser, payload: Partial<IUser>): Promise<IUserWithoutPassword | null> => {
+
     const userDetails = await User.findOneAndUpdate({ _id: user.userId }, payload, { new: true });
-    return userDetails;
+
+    if (!userDetails) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User doesn't exists")
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userDetailsWithoutPassword } = userDetails.toObject();
+
+    return userDetailsWithoutPassword;
 }
 
 
