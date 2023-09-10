@@ -75,6 +75,7 @@ const signIn = async (payload: Partial<IUser>): Promise<IUser> => {
         )
 
         responseData.token = token;
+        responseData.role = 'user';
     } else {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'Wrong password!');
     }
