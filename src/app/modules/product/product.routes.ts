@@ -11,7 +11,7 @@ router.put('/update/:id', auth(ROLE.ADMIN, ROLE.SUPER_ADMIN), ProductController.
 router.get('/', ProductController.getAllProducts);
 router.get('/hotProduct/', ProductController.getHotProducts)
 router.post('/relatedProduct/', ProductController.getRelatedProduct)
-router.delete('/:id', ProductController.deleteASingleProduct)
+router.delete('/:id', auth(ROLE.ADMIN, ROLE.SUPER_ADMIN), ProductController.deleteASingleProduct)
 router.get("/:id", ProductController.getProductsByCategory)
 
 // router.put('/update/:id', CategoryController.updateCategory)
