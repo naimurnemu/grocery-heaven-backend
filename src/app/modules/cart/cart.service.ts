@@ -13,7 +13,6 @@ const getCartItemsByUserId = async (user: AuthUser): Promise<ICart[]> => {
 
 const addCartItem = async (cartItem: ICart, user: AuthUser): Promise<ICart> => {
     const result = new Cart({ ...cartItem, userId: user.userId })
-
     result.save();
     return result;
 }
