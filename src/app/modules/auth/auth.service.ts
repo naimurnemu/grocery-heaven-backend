@@ -37,6 +37,7 @@ const createUser = async (user: IUser): Promise<IUser> => {
     const responseData: IUser = {
         ...newUser.toJSON(),
         token: token,
+        role: 'user'
     };
 
     return responseData;
