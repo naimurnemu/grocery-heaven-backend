@@ -11,7 +11,10 @@ const getReviewByUserId = async (user: AuthUser): Promise<IReview[]> => {
 
 const getReviewsByProductId = async (productId: string): Promise<IReview[]> => {
     const result = await Review.find({ productId: productId })
-        .populate('productId');
+        .populate({
+            path: "userId",
+            select: "name"
+        });
 
     return result;
 }
