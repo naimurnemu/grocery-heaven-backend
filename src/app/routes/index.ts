@@ -11,6 +11,7 @@ import { HeroMasterDataRoutes } from '../modules/heroMasterData/heroMasterData.r
 import { ProductRoutes } from '../modules/product/product.routes';
 import { WishListRoutes } from '../modules/wishList/wishList.routes';
 import { ReviewRoutes } from '../modules/review/review.routes';
+import { OrderRoutes } from '../modules/order/order.routes';
 
 const routes = express.Router();
 
@@ -58,6 +59,10 @@ const moduleRoutes = [
   {
     path: "/review/",
     route: ReviewRoutes
+  },
+  {
+    path: "/order/",
+    route: OrderRoutes
   },
 ];
 

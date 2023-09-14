@@ -3,12 +3,12 @@ import httpStatus from "http-status";
 import ApiError from "../../../errors/ApiError";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
-import { AuthenticatedRequest } from "../../interfaces/common";
 import { CartService } from "./cart.service";
+import { AuthUser } from "../../interfaces/common";
 
 const getCartItemsByUserId: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
-        const user = req.user;
+    async (req: Request, res: Response) => {
+        const user = req.user as AuthUser;
         if (!user) {
             throw new ApiError(httpStatus.NOT_FOUND, '')
         }
@@ -24,9 +24,9 @@ const getCartItemsByUserId: RequestHandler = catchAsync(
 )
 
 const addCartItem: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
+    async (req: Request, res: Response) => {
         const payload = req.body;
-        const user = req.user;
+        const user = req.user as AuthUser;
         if (!user) {
             throw new ApiError(httpStatus.NOT_FOUND, 'User is not Authorised')
         }
@@ -42,7 +42,7 @@ const addCartItem: RequestHandler = catchAsync(
 )
 
 const deleteCartItem: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
+    async (req: Request, res: Response) => {
         const { id } = req.params;
         const result = await CartService.deleteCartItem(id);
 
@@ -57,7 +57,7 @@ const deleteCartItem: RequestHandler = catchAsync(
 
 const getMostSellingProduct: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
-      
+
         const result = await CartService.bestSellingProduct();
 
         sendResponse(res, {
