@@ -89,8 +89,8 @@ const getRelatedProduct: RequestHandler = catchAsync(
 );
 const deleteASingleProduct: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
-        const {id} = req.params;
-        const result = await ProductService.deleteProduct(id);
+        const { id } = req.params;
+        const result = await ProductService.getProductsById(id);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -100,6 +100,21 @@ const deleteASingleProduct: RequestHandler = catchAsync(
         })
     }
 );
+
+const getProductsById: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const result = await ProductService.getProductsById(id);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Product retrieved successfully',
+            data: result
+        })
+    }
+);
+
 export const ProductController = {
     postAProduct,
     getAllProducts,
@@ -107,5 +122,6 @@ export const ProductController = {
     updateASingleProduct,
     getHotProducts,
     getRelatedProduct,
-    deleteASingleProduct
+    deleteASingleProduct,
+    getProductsById
 }

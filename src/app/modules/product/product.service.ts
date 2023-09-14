@@ -84,6 +84,18 @@ const deleteProduct = async (id: string): Promise<string> => {
         return "Product Deleted"
     }
 }
+
+const getProductsById = async (id: string): Promise<IProduct> => {
+    const product = await Product.findOne({
+        _id: id,
+    });
+    if (!product) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Product not found!')
+    }
+
+    return product;
+}
+
 export const ProductService = {
     postAProduct,
     getAllProducts,
@@ -91,6 +103,7 @@ export const ProductService = {
     updateProductByID,
     getHotProduct,
     getRelatedProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsById
 }
 

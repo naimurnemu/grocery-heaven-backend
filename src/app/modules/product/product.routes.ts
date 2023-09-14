@@ -13,6 +13,7 @@ router.get('/hotProduct/', ProductController.getHotProducts)
 router.post('/relatedProduct/', ProductController.getRelatedProduct)
 router.delete('/:id', auth(ROLE.ADMIN, ROLE.SUPER_ADMIN), ProductController.deleteASingleProduct)
 router.get("/:id", ProductController.getProductsByCategory)
+router.get("/single/:id", ProductController.getProductsById)
 
 // router.put('/update/:id', CategoryController.updateCategory)
 // router.get('/',CategoryController.getAllCategories)
