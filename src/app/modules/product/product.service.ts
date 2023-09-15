@@ -40,7 +40,7 @@ const getAllProducts = async (): Promise<IProduct[]> => {
 
 const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => {
     const products = await Product.find({
-        status: "active",
+        status: "In Stock",
         category: { $all: [categoryID] },
     }).populate('subcategory', 'category name shortDesc -_id');
 
@@ -51,9 +51,9 @@ const getProductByCategory = async (categoryID: string): Promise<IProduct[]> => 
 const getHotProduct = async (): Promise<IProduct[]> => {
 
     const hotproduct = await Product.find({
-        status: "active",
+        status: "In Stock",
         createdAt: {
-            $gte: moment().subtract(6, 'days').format()
+            $gte: moment().subtract(30, 'days').format()
             // $lt: new Date(2012, 7, 15)
         },
         discount: {
@@ -66,7 +66,7 @@ const getHotProduct = async (): Promise<IProduct[]> => {
 const getRelatedProduct = async (categoryID: string, pid: string): Promise<IProduct[]> => {
 
     const hotproduct = await Product.find({
-        status: "active",
+        status: "In Stock",
         category: { $all: [categoryID] },
         _id: { $ne: pid }
     }).populate('subcategory', 'category name shortDesc -_id');
