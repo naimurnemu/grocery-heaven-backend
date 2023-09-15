@@ -5,6 +5,7 @@ export type ICart = {
     userId: Types.ObjectId;
     productId: Types.ObjectId | IProduct;
     quantity: number;
+    status: string;
 }
 
 
