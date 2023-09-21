@@ -38,8 +38,8 @@ const updateASingleProduct: RequestHandler = catchAsync(
 )
 const getAllProducts: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
-        // console.log(req.user)
-        const result = await ProductService.getAllProducts();
+        const { searchQuery } = req.query;
+        const result = await ProductService.getAllProducts(searchQuery as string);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -123,5 +123,5 @@ export const ProductController = {
     getHotProducts,
     getRelatedProduct,
     deleteASingleProduct,
-    getProductsById
+    getProductsById,
 }

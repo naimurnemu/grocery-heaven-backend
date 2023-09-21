@@ -1,6 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
 import httpStatus from "http-status";
-import ApiError from "../../../errors/ApiError";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { OrderService } from "./order.service";
@@ -9,10 +8,21 @@ import { AuthUser } from "../../interfaces/common";
 const getOrdersByUserId: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
         const user = req.user as AuthUser;
-        if (!user) {
-            throw new ApiError(httpStatus.NOT_FOUND, '')
-        }
         const result = await OrderService.getOrdersByUserId(user);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Orders retrieved successfully',
+            data: result
+        })
+    }
+)
+
+const getAllOrders: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+
+        const result = await OrderService.getAllOrders();
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -54,8 +64,25 @@ const deleteOrder: RequestHandler = catchAsync(
     }
 )
 
+const updateOrder: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const payload = req.body;
+        const result = await OrderService.updateOrder(id, payload);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Order updated successfully',
+            data: result
+        })
+    }
+)
+
 export const OrderController = {
     getOrdersByUserId,
+    getAllOrders,
     addOrder,
-    deleteOrder
+    deleteOrder,
+    updateOrder
 }

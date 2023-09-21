@@ -32,8 +32,21 @@ const updateProductByID = async (product: IProduct, params: string): Promise<IPr
 
     return responseData;
 }
-const getAllProducts = async (): Promise<IProduct[]> => {
-    const allProducts = await Product.find({}).populate('subcategory', 'category name shortDesc -_id');
+const getAllProducts = async (searchQuery: string): Promise<IProduct[]> => {
+    let whereCondition = {};
+    if (searchQuery) {
+        const regexPattern = new RegExp(searchQuery, 'i');
+        whereCondition = {
+            $or: [
+                { productName: regexPattern },
+                { brand: regexPattern },
+                { description: regexPattern },
+                { type: regexPattern },
+            ],
+        }
+    }
+
+    const allProducts = await Product.find(whereCondition).populate('subcategory', 'category name shortDesc -_id');
 
     return allProducts;
 }
@@ -104,6 +117,7 @@ export const ProductService = {
     getHotProduct,
     getRelatedProduct,
     deleteProduct,
-    getProductsById
+    getProductsById,
+
 }
 

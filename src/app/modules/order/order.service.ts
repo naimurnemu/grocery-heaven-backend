@@ -6,9 +6,14 @@ import { IProduct } from "../product/product.interface";
 import { IOrder } from "./order.interface";
 import { Order } from "./order.model";
 
-
 const getOrdersByUserId = async (user: AuthUser): Promise<IOrder[]> => {
     const result = await Order.find({ userId: user.userId })
+        .populate('products.productId');
+    return result;
+}
+
+const getAllOrders = async (): Promise<IOrder[]> => {
+    const result = await Order.find({}).sort({ createdAt: -1 })
         .populate('products.productId');
     return result;
 }
@@ -62,9 +67,19 @@ const deleteOrder = async (
     return result;
 };
 
+const updateOrder = async (
+    id: string,
+    payload: Partial<IOrder>
+): Promise<IOrder | null> => {
+    const result = await Order.findByIdAndUpdate({ _id: id }, payload, { new: true });
+    return result;
+};
+
 
 export const OrderService = {
     getOrdersByUserId,
+    getAllOrders,
     addOrder,
-    deleteOrder
+    deleteOrder,
+    updateOrder
 }
