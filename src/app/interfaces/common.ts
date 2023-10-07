@@ -36,3 +36,9 @@ export enum ROLE {
     ADMIN = 'admin',
     USER = 'user'
 }
+export type IPaginationOptions = {
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+};

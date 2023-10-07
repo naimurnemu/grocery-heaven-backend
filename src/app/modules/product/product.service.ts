@@ -1,11 +1,13 @@
 
 import httpStatus from "http-status";
 import moment from "moment";
+import { SortOrder } from 'mongoose';
 import ApiError from "../../../errors/ApiError";
-import { AuthUser } from "../../interfaces/common";
-import { IProduct } from "./product.interface";
+import { paginationHelper } from '../../../helpers/paginationHelper';
+import { AuthUser, IGenericResponse, IPaginationOptions } from "../../interfaces/common";
+import { productSearchableFields } from './product.constant';
+import { IProduct, IProductsFilters } from "./product.interface";
 import { Product } from "./product.model";
-
 const postAProduct = async (product: IProduct, user: AuthUser): Promise<IProduct> => {
     // const { name } = product
     if (user?.role !== 'admin') {
@@ -95,7 +97,56 @@ const getProductsById = async (id: string): Promise<IProduct> => {
 
     return product;
 }
+const getSearchProduct = async (filters: IProductsFilters, paginationOptions: IPaginationOptions): Promise<IGenericResponse<IProduct[]>> => {
+    const { searchTerm, ...filtersData } = filters;
+    const { page, limit, skip, sortBy, sortOrder } =
+        paginationHelper.calculatePagination(paginationOptions);
 
+    const andConditions = [];
+    if (searchTerm) {
+        andConditions.push({
+            $or: productSearchableFields.map(field => ({
+                [field]: {
+                    $regex: searchTerm,
+                    $options: 'i',
+                },
+            })),
+        });
+    }
+    // Filters needs $and to fullfill all the conditions
+    if (Object.keys(filtersData).length) {
+        andConditions.push({
+            $and: Object.entries(filtersData).map(([field, value]) => ({
+                [field]: value,
+            })),
+        });
+    }
+
+    // Dynamic  Sort needs  field to  do sorting
+    const sortConditions: { [key: string]: SortOrder } = {};
+    if (sortBy && sortOrder) {
+        sortConditions[sortBy] = sortOrder;
+    }
+    const whereConditions =
+        andConditions.length > 0 ? { $and: andConditions } : {};
+
+    const result = await Product.find(whereConditions)
+        .populate('subcategory', 'category name shortDesc -_id')
+        .sort(sortConditions)
+        .skip(skip)
+        .limit(limit);
+
+    const total = await Product.countDocuments(whereConditions);
+
+    return {
+        meta: {
+            page,
+            limit,
+            total,
+        },
+        data: result,
+    };
+}
 export const ProductService = {
     postAProduct,
     getAllProducts,
@@ -104,6 +155,7 @@ export const ProductService = {
     getHotProduct,
     getRelatedProduct,
     deleteProduct,
-    getProductsById
+    getProductsById,
+    getSearchProduct
 }
 
