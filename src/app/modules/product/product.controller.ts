@@ -1,9 +1,13 @@
 import { Request, RequestHandler, Response } from "express";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
+import { paginationFields } from "../../../shared/paginations";
+import pick from "../../../shared/pick";
 import sendResponse from "../../../shared/sendResponse";
-import { ProductService } from "./product.service";
 import { AuthUser } from "../../interfaces/common";
+import { productFilterableFields } from "./product.constant";
+import { IProduct } from "./product.interface";
+import { ProductService } from "./product.service";
 
 const postAProduct: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
@@ -114,7 +118,23 @@ const getProductsById: RequestHandler = catchAsync(
         })
     }
 );
-
+const getSearchProducts = catchAsync(async (req: Request, res: Response) => {
+    const filters = pick(req.query, productFilterableFields);
+    const paginationOptions = pick(req.query, paginationFields);
+  
+    const result = await ProductService.getSearchProduct(
+      filters,
+      paginationOptions
+    );
+  
+    sendResponse<IProduct[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Faculties fetched successfully !',
+      meta: result.meta,
+      data: result.data,
+    });
+  });
 export const ProductController = {
     postAProduct,
     getAllProducts,
@@ -124,4 +144,5 @@ export const ProductController = {
     getRelatedProduct,
     deleteASingleProduct,
     getProductsById,
+    getSearchProducts
 }

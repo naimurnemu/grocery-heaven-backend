@@ -33,5 +33,17 @@ export type IProduct = {
         ref: 'AdminUser'
     }
 }
-
+export type IProductsFilters = {
+    searchTerm?: string;
+    productName?: string;
+    brand?: string;
+    productCode?: string;
+    type?: string;
+    description?: string;
+    category?: string;
+    price?: string;
+    review?: string;
+    subcategory?: string;
+  };
+  
 export type ProductModel = Model<IProduct, Record<string, unknown>>;
