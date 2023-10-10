@@ -55,6 +55,21 @@ const deleteCartItem: RequestHandler = catchAsync(
     }
 )
 
+const updateQuantity: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const payload = req.body;
+        const result = await CartService.updateQuantity(id, payload);
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Cart item quantity updated successfully',
+            data: result
+        })
+    }
+)
+
 const getMostSellingProduct: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
 
@@ -73,5 +88,6 @@ export const CartController = {
     getCartItemsByUserId,
     addCartItem,
     deleteCartItem,
+    updateQuantity,
     getMostSellingProduct
 }

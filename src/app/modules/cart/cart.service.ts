@@ -24,8 +24,16 @@ const deleteCartItem = async (
     return result;
 };
 
-const bestSellingProduct = async () : Promise<ICart[]> => {
-    const products = await  Cart.find({}).sort({ salesQuantity: -1 }).limit(5)
+const updateQuantity = async (
+    id: string,
+    payload: Partial<ICart>
+): Promise<ICart | null> => {
+    const result = await Cart.findByIdAndUpdate({ _id: id }, payload, { new: true });
+    return result;
+};
+
+const bestSellingProduct = async (): Promise<ICart[]> => {
+    const products = await Cart.find({}).sort({ salesQuantity: -1 }).limit(5)
     console.log(products)
     return products
 }
@@ -33,5 +41,6 @@ export const CartService = {
     getCartItemsByUserId,
     addCartItem,
     deleteCartItem,
+    updateQuantity,
     bestSellingProduct
 }

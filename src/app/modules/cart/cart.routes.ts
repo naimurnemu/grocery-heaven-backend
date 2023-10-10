@@ -10,5 +10,6 @@ router.get('/', auth(ROLE.USER), CartController.getCartItemsByUserId);
 router.post('/', auth(ROLE.USER), CartController.addCartItem);
 router.get('/product/most-selling/', CartController.getMostSellingProduct)
 router.delete('/:id', auth(ROLE.USER), CartController.deleteCartItem);
+router.put('/:id', auth(ROLE.USER), CartController.updateQuantity);
 
 export const CartRoutes = router;
