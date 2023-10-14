@@ -118,6 +118,19 @@ const getProductsById: RequestHandler = catchAsync(
         })
     }
 );
+const getLatestProducts: RequestHandler = catchAsync(
+    async (req: Request, res: Response) => {
+
+        const result = await ProductService.getLatestProduct();
+
+        sendResponse(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Product retrieved successfully',
+            data: result
+        })
+    }
+);
 const getSearchProducts = catchAsync(async (req: Request, res: Response) => {
     const filters = pick(req.query, productFilterableFields);
     const paginationOptions = pick(req.query, paginationFields);
@@ -144,5 +157,6 @@ export const ProductController = {
     getRelatedProduct,
     deleteASingleProduct,
     getProductsById,
-    getSearchProducts
+    getSearchProducts,
+    getLatestProducts
 }

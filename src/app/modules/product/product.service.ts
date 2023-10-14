@@ -196,6 +196,16 @@ const getSearchProduct = async (filters: IProductsFilters, paginationOptions: IP
         data: result,
     };
 }
+const getLatestProduct = async (): Promise<IProduct[]> => {
+
+    const hotproduct = await Product.find({
+        status: "In Stock",
+    }).populate('subcategory', 'category name shortDesc -_id')
+    .sort({createdAt: -1})
+    .limit(20)
+
+    return hotproduct
+}
 export const ProductService = {
     postAProduct,
     getAllProducts,
@@ -205,6 +215,7 @@ export const ProductService = {
     getRelatedProduct,
     deleteProduct,
     getProductsById,
-    getSearchProduct
+    getSearchProduct,
+    getLatestProduct
 }
 
