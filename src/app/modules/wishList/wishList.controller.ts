@@ -1,14 +1,14 @@
-import { RequestHandler, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { WishListService } from "./wishList.service";
-import { AuthenticatedRequest } from "../../interfaces/common";
 import ApiError from "../../../errors/ApiError";
+import { AuthUser } from "../../interfaces/common";
 
 const getWishListByUserId: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
-        const user = req.user;
+    async (req: Request, res: Response) => {
+        const user = req.user as AuthUser;
         if (!user) {
             throw new ApiError(httpStatus.NOT_FOUND, '')
         }
@@ -24,9 +24,9 @@ const getWishListByUserId: RequestHandler = catchAsync(
 )
 
 const addWishListItem: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
+    async (req: Request, res: Response) => {
         const payload = req.body;
-        const user = req.user;
+        const user = req.user as AuthUser;
         if (!user) {
             throw new ApiError(httpStatus.NOT_FOUND, 'User is not Authorised')
         }
@@ -42,7 +42,7 @@ const addWishListItem: RequestHandler = catchAsync(
 )
 
 const deleteWishListItem: RequestHandler = catchAsync(
-    async (req: AuthenticatedRequest, res: Response) => {
+    async (req: Request, res: Response) => {
         const { id } = req.params;
         const result = await WishListService.deleteWishListItem(id);
 
