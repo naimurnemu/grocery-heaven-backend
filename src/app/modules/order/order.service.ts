@@ -68,11 +68,13 @@ const addOrder = async (user: AuthUser, payload: Partial<IOrder>): Promise<IOrde
 
     const roundedTotalPrice = Number(totalPrice.toFixed(2));
 
+    const { paymentMethod, ...billingDetails } = payload;
     const orderDetails = {
         userId: userId,
         products: products,
         totalPrice: roundedTotalPrice,
-        billingDetails: payload
+        paymentMethod: paymentMethod,
+        billingDetails: billingDetails
     };
 
 
