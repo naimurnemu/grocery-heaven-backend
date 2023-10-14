@@ -17,8 +17,25 @@ export type IOrder = {
     }];
     orderStatus: OrderStatus;
     isDelivered: boolean;
-    deliveryAddress: string;
+    billingDetails: IBillingDetails;
     totalPrice: number;
+    paymentMethod: 'COD';
+}
+
+type IBillingDetails = {
+    name: {
+        firstName: string;
+        lastName: string;
+    },
+    companyName?: string;
+    country: string;
+    streetAddress: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    phone: string;
+    email: string;
+    orderNotes?: string;
 }
 
 export type OrderModel = Model<IOrder, Record<string, unknown>>;

@@ -1,8 +1,9 @@
 import { Schema, model } from "mongoose";
 import { OrderModel, IOrder, OrderStatus } from "./order.interface";
+// import { Product } from "../product/product.model";
 
 
-const orderSchema = new Schema<IOrder>(
+const OrderSchema = new Schema<IOrder>(
     {
         userId: {
             type: Schema.Types.ObjectId,
@@ -31,8 +32,58 @@ const orderSchema = new Schema<IOrder>(
         },
         totalPrice: {
             type: Number,
-            // default: calculateTotalPrice
             required: true
+        },
+        billingDetails: {
+            name: {
+                firstName: {
+                    type: String,
+                    required: true
+                },
+                lastName: {
+                    type: String,
+                    required: true
+                },
+            },
+            companyName: {
+                type: String
+            },
+            country: {
+                type: String,
+                required: true
+            },
+            streetAddress: {
+                type: String,
+                required: true
+            },
+            city: {
+                type: String,
+                required: true
+            },
+            state: {
+                type: String,
+                required: true
+            },
+            zipCode: {
+                type: String,
+                required: true
+            },
+            phone: {
+                type: String,
+                required: true
+            },
+            email: {
+                type: String,
+                required: true
+            },
+            orderNotes: {
+                type: String,
+                required: true
+            }
+        },
+        paymentMethod: {
+            type: String,
+            enum: ['COD']
         }
 
     },
@@ -55,6 +106,12 @@ const orderSchema = new Schema<IOrder>(
 
 //     return total;
 //   }
+// OrderSchema.statics.isProductAvailable= async (productId: string, quantity:number): Promise<boolean> =>{
+//     const product = await Product.findById(productId);
+//     if(product){
+//         return product.countInStock>quantity
+//     }
+// }
 
-export const Order = model<IOrder, OrderModel>('Order', orderSchema);
+export const Order = model<IOrder, OrderModel>('Order', OrderSchema);
 
