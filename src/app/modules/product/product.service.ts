@@ -109,7 +109,8 @@ const getProductsById = async (id: string): Promise<IProduct> => {
     }
 
     return product;
-}
+};
+
 const getSearchProduct = async (filters: IProductsFilters, paginationOptions: IPaginationOptions): Promise<IGenericResponse<IProduct[]>> => {
     const { searchTerm, ...filtersData } = filters;
     const { page, limit, skip, sortBy, sortOrder } =
@@ -128,11 +129,46 @@ const getSearchProduct = async (filters: IProductsFilters, paginationOptions: IP
     }
     // Filters needs $and to fullfill all the conditions
     if (Object.keys(filtersData).length) {
-        andConditions.push({
-            $and: Object.entries(filtersData).map(([field, value]) => ({
-                [field]: value,
-            })),
-        });
+        // console.log(filtersData)
+        if(Object.keys('price')) {
+            andConditions.push({
+                $and: Object.entries(filtersData).map(([field, value]) => ({
+                    [field]: {
+                        $gte: value
+                    },
+                })),
+            });
+        }
+        else if(Object.keys('discount')) {
+            andConditions.push({
+                $and: Object.entries(filtersData).map(([field, value]) => ({
+                    [field]: {
+                        $gte: value
+                    },
+                })),
+            });
+        }
+        else if(Object.keys('countInStock')) {
+            andConditions.push({
+                $and: Object.entries(filtersData).map(([field, value]) => ({
+                    [field]: {
+                        $gte: value
+                    },
+                })),
+            });
+        }
+        else {
+            andConditions.push({
+                $and: Object.entries(filtersData).map(([field, value]) => ({
+                    [field]: value,
+                })),
+            });
+        }
+        // andConditions.push({
+        //     $and: Object.entries(filtersData).map(([field, value]) => ({
+        //         [field]: value,
+        //     })),
+        // });
     }
 
     // Dynamic  Sort needs  field to  do sorting

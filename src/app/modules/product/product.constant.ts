@@ -6,9 +6,11 @@ export const productFilterableFields = [
     'description',
     'type',
     'price',
-    // 'category',
-    // 'subcategory',
+    'category',
+    'subcategory',
     'review',
+    'countInStock',
+    'discount'
   ];
 
   export const productSearchableFields = [
