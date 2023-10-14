@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config/index';
-import { logger, errorLogger } from './shared/logger';
 import { Server } from 'http';
 
 process.on('uncaughtException', error => {
-    errorLogger.error(error);
+    console.error(error);
     process.exit(1);
 });
 
@@ -14,13 +13,13 @@ let server: Server;
 async function bootstrap() {
     try {
         await mongoose.connect(config.database_url as string);
-        logger.info('Database is connected successfully');
+        console.info('Database is connected successfully');
 
         server = app.listen(config.port, () => {
-            logger.info(`Applicaiton app listening on port ${config.port}`);
+            console.info(`Applicaiton app listening on port ${config.port}`);
         });
     } catch (error) {
-        errorLogger.error('failed to connect db', error);
+        console.error('failed to connect db', error);
     }
 
     process.on('unhandledRejection', error => {
@@ -29,7 +28,7 @@ async function bootstrap() {
         );
         if (server) {
             server.close(() => {
-                errorLogger.error(error);
+                console.error(error);
                 process.exit(1);
             });
         } else {
@@ -41,7 +40,7 @@ async function bootstrap() {
 bootstrap();
 
 process.on('SIGTERM', () => {
-    logger.info('SIGTERM is received');
+    console.info('SIGTERM is received');
     if (server) {
         server.close();
     }
