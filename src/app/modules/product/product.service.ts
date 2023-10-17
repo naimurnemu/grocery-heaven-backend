@@ -68,7 +68,7 @@ const getHotProduct = async (): Promise<IProduct[]> => {
     const hotproduct = await Product.find({
         status: "In Stock",
         createdAt: {
-            $gte: moment().subtract(30, 'days').format()
+            $gte: moment().subtract(60, 'days').format()
             // $lt: new Date(2012, 7, 15)
         },
         discount: {
@@ -128,57 +128,103 @@ const getSearchProduct = async (filters: IProductsFilters, paginationOptions: IP
         });
     }
     // Filters needs $and to fullfill all the conditions
+    // if (Object.keys(filtersData).length) {
+    //     // console.log(filtersData)
+    //     if(Object.keys('price')) {
+    //         andConditions.push({
+    //             $and: Object.entries(filtersData).map(([field, value]) => ({
+    //                 [field]: {
+    //                     $gte: value
+    //                 },
+    //             })),
+    //         });
+    //     }
+    //     else if(Object.keys('discount')) {
+    //         andConditions.push({
+    //             $and: Object.entries(filtersData).map(([field, value]) => ({
+    //                 [field]: {
+    //                     $gte: value
+    //                 },
+    //             })),
+    //         });
+    //     }
+    //     else if(Object.keys('countInStock')) {
+    //         andConditions.push({
+    //             $and: Object.entries(filtersData).map(([field, value]) => ({
+    //                 [field]: {
+    //                     $gte: value
+    //                 },
+    //             })),
+    //         });
+    //     }
+    //     else if(Object.keys('category')) {
+    //         andConditions.push({
+    //             $and: Object.entries(filtersData).map(([field, value]) => ({
+    //                 [field]: {
+    //                     $in: value
+    //                 },
+    //             })),
+    //         });
+    //     }
+    //     else {
+    //         andConditions.push({
+    //             $and: Object.entries(filtersData).map(([field, value]) => ({
+    //                 [field]: value,
+    //             })),
+    //         });
+    //     }
+    //     // andConditions.push({
+    //     //     $and: Object.entries(filtersData).map(([field, value]) => ({
+    //     //         [field]: value,
+    //     //     })),
+    //     // });
+    // }
     if (Object.keys(filtersData).length) {
         // console.log(filtersData)
-        if(Object.keys('price')) {
-            andConditions.push({
-                $and: Object.entries(filtersData).map(([field, value]) => ({
-                    [field]: {
-                        $gte: value
-                    },
-                })),
-            });
-        }
-        else if(Object.keys('discount')) {
-            andConditions.push({
-                $and: Object.entries(filtersData).map(([field, value]) => ({
-                    [field]: {
-                        $gte: value
-                    },
-                })),
-            });
-        }
-        else if(Object.keys('countInStock')) {
-            andConditions.push({
-                $and: Object.entries(filtersData).map(([field, value]) => ({
-                    [field]: {
-                        $gte: value
-                    },
-                })),
-            });
-        }
-        else {
-            andConditions.push({
-                $and: Object.entries(filtersData).map(([field, value]) => ({
-                    [field]: value,
-                })),
-            });
-        }
-        // andConditions.push({
-        //     $and: Object.entries(filtersData).map(([field, value]) => ({
-        //         [field]: value,
-        //     })),
-        // });
+
+        Object.entries(filtersData).map(([field, value]) => {
+            if (field == 'price' || field == 'discount' || field === 'countInStock') {
+                andConditions.push({
+                    $and: [{
+                        [field]: {
+                            $gte: Number(value)
+                        },
+                    }]
+                })
+            }
+            else if (field == 'category') {
+                andConditions.push({
+                    category: { $in: value }
+                });
+            }
+            else {
+                andConditions.push({
+                    $and: [{
+                        [field]: value
+                    }]
+                })
+            }
+        })
+
     }
+
+
+
+
+
 
     // Dynamic  Sort needs  field to  do sorting
     const sortConditions: { [key: string]: SortOrder } = {};
     if (sortBy && sortOrder) {
         sortConditions[sortBy] = sortOrder;
     }
+    console.log(andConditions[0].$or[3])
+    console.log(andConditions[1])
+    // andConditions[1].$or?.map((item) => console.log(item))
+
     const whereConditions =
         andConditions.length > 0 ? { $and: andConditions } : {};
-
+        console.log(JSON.stringify(whereConditions))
     const result = await Product.find(whereConditions)
         .populate('subcategory', 'category name shortDesc -_id')
         .sort(sortConditions)
@@ -201,8 +247,8 @@ const getLatestProduct = async (): Promise<IProduct[]> => {
     const hotproduct = await Product.find({
         status: "In Stock",
     }).populate('subcategory', 'category name shortDesc -_id')
-    .sort({createdAt: -1})
-    .limit(20)
+        .sort({ createdAt: -1 })
+        .limit(20)
 
     return hotproduct
 }
