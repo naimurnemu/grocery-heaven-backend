@@ -6,7 +6,7 @@ import ApiError from "../../../errors/ApiError";
 import { paginationHelper } from '../../../helpers/paginationHelper';
 import { AuthUser, IGenericResponse, IPaginationOptions } from "../../interfaces/common";
 import { productSearchableFields } from './product.constant';
-import { IProduct, IProductsFilters } from "./product.interface";
+import { IProduct, IProductBrand, IProductsFilters } from "./product.interface";
 import { Product } from "./product.model";
 const postAProduct = async (product: IProduct, user: AuthUser): Promise<IProduct> => {
     // const { name } = product
@@ -224,7 +224,7 @@ const getSearchProduct = async (filters: IProductsFilters, paginationOptions: IP
 
     const whereConditions =
         andConditions.length > 0 ? { $and: andConditions } : {};
-        console.log(JSON.stringify(whereConditions))
+    console.log(JSON.stringify(whereConditions))
     const result = await Product.find(whereConditions)
         .populate('subcategory', 'category name shortDesc -_id')
         .sort(sortConditions)
@@ -251,6 +251,14 @@ const getLatestProduct = async (): Promise<IProduct[]> => {
         .limit(20)
 
     return hotproduct
+};
+const getProductBrand = async (): Promise<IProductBrand[]> => {
+    const productBrand = await Product.find({
+        status: "In Stock",
+    }).select('brand')
+        .limit(20)
+
+    return productBrand
 }
 export const ProductService = {
     postAProduct,
@@ -262,6 +270,7 @@ export const ProductService = {
     deleteProduct,
     getProductsById,
     getSearchProduct,
-    getLatestProduct
+    getLatestProduct,
+    getProductBrand
 }
 

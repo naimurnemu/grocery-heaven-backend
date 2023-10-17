@@ -6,7 +6,7 @@ import pick from "../../../shared/pick";
 import sendResponse from "../../../shared/sendResponse";
 import { AuthUser } from "../../interfaces/common";
 import { productFilterableFields } from "./product.constant";
-import { IProduct } from "./product.interface";
+import { IProduct, IProductBrand } from "./product.interface";
 import { ProductService } from "./product.service";
 
 const postAProduct: RequestHandler = catchAsync(
@@ -143,9 +143,22 @@ const getSearchProducts = catchAsync(async (req: Request, res: Response) => {
     sendResponse<IProduct[]>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Faculties fetched successfully !',
+      message: 'Product fetched successfully !',
       meta: result.meta,
       data: result.data,
+    });
+  });
+
+
+  const getProductBrands = catchAsync(async (req: Request, res: Response) => {
+  
+    const result = await ProductService.getProductBrand();
+  
+    sendResponse<IProductBrand[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'brand fetched successfully !',
+      data: result,
     });
   });
 export const ProductController = {
@@ -158,5 +171,6 @@ export const ProductController = {
     deleteASingleProduct,
     getProductsById,
     getSearchProducts,
-    getLatestProducts
+    getLatestProducts,
+    getProductBrands
 }

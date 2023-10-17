@@ -33,6 +33,9 @@ export type IProduct = {
         ref: 'AdminUser'
     }
 }
+export type IProductBrand = {
+    brand: string
+}
 export type IProductsFilters = {
     searchTerm?: string;
     productName?: string;
