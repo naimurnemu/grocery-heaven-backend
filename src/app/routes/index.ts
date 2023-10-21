@@ -12,6 +12,7 @@ import { ProductRoutes } from '../modules/product/product.routes';
 import { WishListRoutes } from '../modules/wishList/wishList.routes';
 import { ReviewRoutes } from '../modules/review/review.routes';
 import { OrderRoutes } from '../modules/order/order.routes';
+import { ContactUsRoutes } from '../modules/contactUs/contactUs.routes';
 
 const routes = express.Router();
 
@@ -63,6 +64,10 @@ const moduleRoutes = [
   {
     path: "/order/",
     route: OrderRoutes
+  },
+  {
+    path: "/contact-us/",
+    route: ContactUsRoutes
   },
 ];
 
