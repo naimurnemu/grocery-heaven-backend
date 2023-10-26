@@ -258,7 +258,7 @@ const getProductBrand = async (): Promise<IProductBrand[]> => {
     }).select('brand')
         .limit(20)
 
-    return productBrand
+    return [...new Set(productBrand)]
 }
 export const ProductService = {
     postAProduct,
