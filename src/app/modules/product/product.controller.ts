@@ -94,7 +94,7 @@ const getRelatedProduct: RequestHandler = catchAsync(
 const deleteASingleProduct: RequestHandler = catchAsync(
     async (req: Request, res: Response) => {
         const { id } = req.params;
-        const result = await ProductService.getProductsById(id);
+        const result = await ProductService.deleteProduct(id);
 
         sendResponse(res, {
             statusCode: httpStatus.OK,
@@ -134,33 +134,33 @@ const getLatestProducts: RequestHandler = catchAsync(
 const getSearchProducts = catchAsync(async (req: Request, res: Response) => {
     const filters = pick(req.query, productFilterableFields);
     const paginationOptions = pick(req.query, paginationFields);
-  
+
     const result = await ProductService.getSearchProduct(
-      filters,
-      paginationOptions
+        filters,
+        paginationOptions
     );
-  
+
     sendResponse<IProduct[]>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Product fetched successfully !',
-      meta: result.meta,
-      data: result.data,
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Product fetched successfully !',
+        meta: result.meta,
+        data: result.data,
     });
-  });
+});
 
 
-  const getProductBrands = catchAsync(async (req: Request, res: Response) => {
-  
+const getProductBrands = catchAsync(async (req: Request, res: Response) => {
+
     const result = await ProductService.getProductBrand();
-  
+
     sendResponse<IProductBrand[]>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'brand fetched successfully !',
-      data: result,
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'brand fetched successfully !',
+        data: result,
     });
-  });
+});
 export const ProductController = {
     postAProduct,
     getAllProducts,
