@@ -252,13 +252,17 @@ const getLatestProduct = async (): Promise<IProduct[]> => {
 
     return hotproduct
 };
+
 const getProductBrand = async (): Promise<IProductBrand[]> => {
     const productBrand = await Product.find({
         status: "In Stock",
     }).select('brand')
         .limit(20)
 
-    return [...new Set(productBrand)]
+    const uniqueObjects = Array.from(
+        productBrand.reduce((map, item) => map.set(item.brand, item), new Map()).values()
+    );
+    return uniqueObjects
 }
 export const ProductService = {
     postAProduct,
