@@ -1,0 +1,45 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\.850f273e13218dcf476556acd749c280b6dd1451-audit.json",
+    "files": [
+        {
+            "date": 1691599637454,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-09-08-22-success.log",
+            "hash": "fc151a59169a59e7c97506c9c664d57cb6ffa931b0578bd5942892c154ad5186"
+        },
+        {
+            "date": 1691600742868,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-09-08-23-success.log",
+            "hash": "9fc4a72df96a78009373b4dcca3d75af06724d070dfda2f35637dd7a3b382993"
+        },
+        {
+            "date": 1691638426888,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-10-08-09-success.log",
+            "hash": "6bf0b4657252696d1f241a5847d4cf274f99cdf372ae37e33d93badbdce5cbd3"
+        },
+        {
+            "date": 1691640647602,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-10-08-10-success.log",
+            "hash": "1afcdab430fbb6cb6de4f1b4430528b8bb963f75ebe0d97f05c7c61fba25eb53"
+        },
+        {
+            "date": 1691678846140,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-10-08-20-success.log",
+            "hash": "da6a5d0ecfb9296a94f6033f316d400a8b31604ef0926b7c951bc47920677032"
+        },
+        {
+            "date": 1691679750716,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-10-08-21-success.log",
+            "hash": "5c9c9264c38c2ef858dad34e913b971a7ed80a53e42de5e1e1a4120a02530df9"
+        },
+        {
+            "date": 1691775197570,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\successes\\phu-2023-11-08-23-success.log",
+            "hash": "293125dfcaafc94a25e7b54cdd371b6740f13947270699b51b99a8782e89a4bc"
+        }
+    ],
+    "hashType": "sha256"
+}

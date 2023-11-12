@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\_coders_project\\grocery_shop\\logs\\winston\\errors\\.dd4d45ff325863cd90daedbfeea05187eedf692d-audit.json",
+    "files": [
+        {
+            "date": 1689818761861,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\errors\\phu-2023-20-07-08-error.log",
+            "hash": "a3bad7b3a581e6586c9a823cd62434eecf6c7a0dfe93becfe4f35ac1c41d59d5"
+        },
+        {
+            "date": 1689825354200,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\errors\\phu-2023-20-07-09-error.log",
+            "hash": "5dc774bb4e3def3722f7f0e630226063c41dd38594145f40e9ad72f4011cb431"
+        },
+        {
+            "date": 1689827229429,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\errors\\phu-2023-20-07-10-error.log",
+            "hash": "d1a375208debb1cddc09fee185941b226ff13005bc4385f0946324c826b8999a"
+        },
+        {
+            "date": 1689860845676,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\errors\\phu-2023-20-07-19-error.log",
+            "hash": "a066f5f4721423ed788810e4f8d5c5d3317f99867264bd5d4d7a2471acd3547a"
+        },
+        {
+            "date": 1689866127339,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\errors\\phu-2023-20-07-21-error.log",
+            "hash": "d75291494fc5808d7ab1365493cf4895d3b8b6c497537ea7cd8f7efe5c842575"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\_coders_project\\grocery_shop\\logs\\winston\\successes\\.99aa332ddf8570164058addaf4e6a2e34be18466-audit.json",
+    "files": [
+        {
+            "date": 1689818761852,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\successes\\phu-2023-20-07-08-success.log",
+            "hash": "1b72cfc7f810e3c0c69ea38245270152f7a7eed1f76457559382dddc18a2ac2e"
+        },
+        {
+            "date": 1689825354165,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\successes\\phu-2023-20-07-09-success.log",
+            "hash": "49ea757229ce551b51710f64ef009027b53f972f840d48a64d89c8adb658070d"
+        },
+        {
+            "date": 1689827229421,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\successes\\phu-2023-20-07-10-success.log",
+            "hash": "0d2435be08aa998ac6d9c8559c983bba4831cea743da691513fcdd0bdae70cdf"
+        },
+        {
+            "date": 1689860845668,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\successes\\phu-2023-20-07-19-success.log",
+            "hash": "2f748fc561cf7e56b99d6c6c655df686b4c9e530f47b9d79b27f5083c4da70c6"
+        },
+        {
+            "date": 1689866127333,
+            "name": "E:\\_coders_project\\grocery_shop\\logs\\winston\\successes\\phu-2023-20-07-21-success.log",
+            "hash": "7046549ac7f6c60f4a2032726c92d47674aa3f4b94c59793e243ed953fbfe2af"
+        }
+    ],
+    "hashType": "sha256"
+}

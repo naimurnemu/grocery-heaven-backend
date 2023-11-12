@@ -1,0 +1,45 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\.be3f1af567c5fdf1cb0cc250b0d88b14607c3aeb-audit.json",
+    "files": [
+        {
+            "date": 1691599637490,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-09-08-22-error.log",
+            "hash": "838fb08d392a35c128a117ea8580419a165a4c03e9b62677c2936c1936077a3d"
+        },
+        {
+            "date": 1691600742876,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-09-08-23-error.log",
+            "hash": "b09f8b0ae996f2d71aeff3b5cdaa9444fcdb23bf139745ad4f3f4e8ca1fd76e8"
+        },
+        {
+            "date": 1691638426910,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-09-error.log",
+            "hash": "e4d1ae361c9da1b8494eca8388918a3c01e8576736b19e23ccbfe843645f2013"
+        },
+        {
+            "date": 1691640647613,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-10-error.log",
+            "hash": "3872eea1d137eda344e181e214ded862331d07f9245e38f95d4d992ee793b2bf"
+        },
+        {
+            "date": 1691678846176,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-20-error.log",
+            "hash": "00b032acec4fba11e51de7f8099f57514b25ddd6f3df3369dcf9b818f97d5bce"
+        },
+        {
+            "date": 1691679750723,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-10-08-21-error.log",
+            "hash": "8750520e2d25fa8673a70929adbdc3d439355bb7ce38eb3feb3905e5b077d8f2"
+        },
+        {
+            "date": 1691775197579,
+            "name": "D:\\0grocery-shop\\grocery-shop-backend\\logs\\winston\\errors\\phu-2023-11-08-23-error.log",
+            "hash": "061a9713f000b01600a7213fe39d030f2e2eefadfafd5f0ac50656d27c6e4cd5"
+        }
+    ],
+    "hashType": "sha256"
+}

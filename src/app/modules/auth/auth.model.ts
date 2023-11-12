@@ -1,16 +1,10 @@
 import { Schema, model } from "mongoose";
 import { IUser, UserModel } from "./auth.interface";
-import { role } from "./auth.constant";
 
 const userSchema = new Schema<IUser>(
     {
         phoneNumber: {
-            type: String,
-            required: true
-        },
-        role: {
-            type: String,
-            enum: role
+            type: String
         },
         password: {
             type: String,
@@ -27,15 +21,20 @@ const userSchema = new Schema<IUser>(
                     required: true
                 }
             },
-            required: true
         },
-        budget: {
-            type: Number,
-            required: true
+        gender: {
+            type: String,
         },
-        income: {
-            type: Number,
-            required: true
+        address: {
+            type: String,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        age: {
+            type: Number
         }
     },
     {

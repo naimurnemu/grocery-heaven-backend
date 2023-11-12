@@ -1,16 +1,34 @@
 import { Model } from "mongoose";
 
+
 export type IUser = {
-    phoneNumber: string;
-    role: 'seller' | 'buyer';
+    email: string;
     password: string;
-    name: {
+    phoneNumber?: string;
+    role: 'user';
+    name?: {
         firstName: string;
         lastName: string;
     };
-    address: string;
-    budget: number;
-    income: number;
+    address?: string;
+    gender?: 'male' | 'female';
+    age?: number;
+    token?: string;
 }
+
+// export type IUser = {
+//     phoneNumber: string;
+//     role: Role;
+//     password: string;
+//     name: {
+//         firstName: string;
+//         lastName: string;
+//     };
+//     address: string;
+//     gender: 'male' | 'female';
+//     age?: number;
+//     email: string;
+//     token?: string;
+// }
 
 export type UserModel = Model<IUser, Record<string, unknown>>;
