@@ -1,7 +1,6 @@
 import httpStatus from 'http-status';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import { logger } from './shared/logger';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 
@@ -12,9 +11,9 @@ app.use(cors());
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+// app.use(auth)
 // Application routes
-logger.info(app.get('env'));
+console.info(app.get('env'));
 
 app.use('/api/v1', routes);
 

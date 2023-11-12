@@ -1,17 +1,16 @@
 import { ErrorRequestHandler } from 'express';
-import config from '../../config';
-import { IGenericErrorMessage } from '../interfaces/error';
-import handleValidationError from '../../errors/handleValidationError';
-import ApiError from '../../errors/ApiError';
-import { errorLogger } from '../../shared/logger';
 import { ZodError } from 'zod';
-import handleZodError from '../../errors/handleZodError';
+import config from '../../config';
+import ApiError from '../../errors/ApiError';
 import handleCastError from '../../errors/handleCastError';
+import handleValidationError from '../../errors/handleValidationError';
+import handleZodError from '../../errors/handleZodError';
+import { IGenericErrorMessage } from '../interfaces/error';
 
-const globalErrorHandler: ErrorRequestHandler = (error, req, res) => {
+const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   config.env === 'development'
     ? console.log('globalErorHandler ~ ', error)
-    : errorLogger.error('globalErrorHandler ~ ', error);
+    : console.error('globalErrorHandler ~ ', error);
 
   let statusCode = 500;
   let message = 'Something went wrong !';
